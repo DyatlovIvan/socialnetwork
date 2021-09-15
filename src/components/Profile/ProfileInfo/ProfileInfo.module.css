@@ -1,0 +1,12 @@
+.descriptionBlock{
+    padding: 10px;
+}
+
+.descriptionBlock img {
+
+    height: 200px;
+}
+.headLayer img {
+    height: 300px;
+    width: 100%;
+}
