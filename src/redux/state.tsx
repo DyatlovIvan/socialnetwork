@@ -1,4 +1,47 @@
-let state = {
+export type PostsType = {
+    id: number
+    message: string
+    likeCount: number
+}
+
+export type DialogsType = {
+    id: number
+    name: string
+    img: string
+}
+
+type MessagesType = {
+    id: number
+    message: string
+}
+
+type FriendsType = {
+    id: number
+    name: string
+    img: string
+}
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+}
+
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+}
+
+type SidebarType = {
+    friends: Array<FriendsType>
+}
+
+export type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sidebar: SidebarType
+}
+
+
+let state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, how a u?', likeCount: 12},
@@ -8,12 +51,36 @@ let state = {
     },
     dialogsPage: {
         dialogs: [
-            {id: 1, name: 'Dima', img : 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
-            {id: 2, name: 'Valera', img : 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
-            {id: 3, name: 'Sveta', img : 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
-            {id: 4, name: 'Tanya', img : 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
-            {id: 5, name: 'Anton', img : 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
-            {id: 6, name: 'Alexandr', img : 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'}
+            {
+                id: 1,
+                name: 'Dima',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
+            {
+                id: 2,
+                name: 'Valera',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
+            {
+                id: 3,
+                name: 'Sveta',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
+            {
+                id: 4,
+                name: 'Tanya',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
+            {
+                id: 5,
+                name: 'Anton',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
+            {
+                id: 6,
+                name: 'Alexandr',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            }
         ],
         messages: [
             {id: 1, message: 'hi'},
@@ -21,11 +88,23 @@ let state = {
             {id: 3, message: 'yo'},
         ]
     },
-    sidebar:{
-        friends:[
-            {id:1, name: 'Dima', img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
-            {id:2, name: 'Valera', img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
-            {id:3, name: 'Sveta', img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'},
+    sidebar: {
+        friends: [
+            {
+                id: 1,
+                name: 'Dima',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
+            {
+                id: 2,
+                name: 'Valera',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
+            {
+                id: 3,
+                name: 'Sveta',
+                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+            },
         ]
     }
 }
