@@ -7,11 +7,6 @@ import {RootStateType, updateNewPostText} from "./redux/state";
 import {Dialog} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 
-// export type addPostType = {
-//     addPost:(textPost:string) =>void
-// }
-
-// prop => object js => {addPost: addPost: () => ...}
 
 type AppType = {
     state: RootStateType

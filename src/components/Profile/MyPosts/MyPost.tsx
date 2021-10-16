@@ -16,7 +16,7 @@ export function MyPost(props: MyPostType) {
     let postsElement = props.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>);
 
     const AddNewPostHandler = () => {
-        debugger
+
         let text = props.newPostText
         props.addPost()
     }

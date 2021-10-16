@@ -1,6 +1,12 @@
-// export type addPostType = (textPost:string) => void
 
-import {renderEntireTree} from "../render";
+let renderEntireTree = () =>{
+
+}
+
+export let subscribes = (callBack:() =>void)=>{
+    debugger
+    renderEntireTree = callBack;
+}
 
 export type PostsType = {
     id: number
@@ -121,13 +127,13 @@ export const addPost = () =>{
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = '';
 
-    renderEntireTree(state)
+    renderEntireTree()
 }
 
 export const updateNewPostText = (value:string) =>{
 
     state.profilePage.newPostText = value;
-    renderEntireTree(state)
+    renderEntireTree()
 
 }
 
