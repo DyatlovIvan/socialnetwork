@@ -1,12 +1,19 @@
 
-let renderEntireTree = () =>{
-
+export type storeType = {
+    _state: RootStateType
+    renderEntireTree: () => void
+    addPost: () => void
+    updateNewPostText: (value: string) => void
+    subscribes: (callBack: () => void) => void
+    getState: ()=>void
+    dispatch: (action: ActionsTypes) => void
 }
 
-export let subscribes = (callBack:() =>void)=>{
-    debugger
-    renderEntireTree = callBack;
-}
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> | 
+                        ReturnType<typeof updateNewPostTextActionCreator> |
+                        ReturnType<typeof sendMessageCreator>|
+                        ReturnType<typeof updateNewMessageBodyCreator>
+
 
 export type PostsType = {
     id: number
@@ -33,12 +40,14 @@ type FriendsType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText:string
+    newPostText: string
 }
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessageBody:string
+
 }
 
 type SidebarType = {
@@ -51,91 +60,131 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 
+const store:storeType = {
+    _state: {
+        profilePage: {
+            posts: [
+                { id: 1, message: 'Hi, how a u?', likeCount: 12 },
+                { id: 2, message: "It\'s my first post", likeCount: 10 }
+            ],
+            newPostText: ''
 
-let state: RootStateType = {
-    profilePage: {
-        posts: [
-            {id: 1, message: 'Hi, how a u?', likeCount: 12},
-            {id: 2, message: "It\'s my first post", likeCount: 10}
-        ],
-        newPostText: ''
+        },
+        dialogsPage: {
+            dialogs: [
+                {
+                    id: 1,
+                    name: 'Dima',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+                {
+                    id: 2,
+                    name: 'Valera',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+                {
+                    id: 3,
+                    name: 'Sveta',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+                {
+                    id: 4,
+                    name: 'Tanya',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+                {
+                    id: 5,
+                    name: 'Anton',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+                {
+                    id: 6,
+                    name: 'Alexandr',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                }
+            ],
+            messages: [
+                { id: 1, message: 'hi' },
+                { id: 2, message: 'how a u?' },
+                { id: 3, message: 'yo' },
+            ],
+            newMessageBody: ''
+        },
+        sidebar: {
+            friends: [
+                {
+                    id: 1,
+                    name: 'Dima',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+                {
+                    id: 2,
+                    name: 'Valera',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+                {
+                    id: 3,
+                    name: 'Sveta',
+                    img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
+                },
+            ]
+        }
+    },
+    renderEntireTree() {
+        console.log('new text');
+    },
 
+    subscribes(callBack: () => void) {
+        this.renderEntireTree = callBack;
     },
-    dialogsPage: {
-        dialogs: [
-            {
-                id: 1,
-                name: 'Dima',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-            {
-                id: 2,
-                name: 'Valera',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-            {
-                id: 3,
-                name: 'Sveta',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-            {
-                id: 4,
-                name: 'Tanya',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-            {
-                id: 5,
-                name: 'Anton',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-            {
-                id: 6,
-                name: 'Alexandr',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            }
-        ],
-        messages: [
-            {id: 1, message: 'hi'},
-            {id: 2, message: 'how a u?'},
-            {id: 3, message: 'yo'},
-        ]
+    getState() {
+        return this._state
     },
-    sidebar: {
-        friends: [
-            {
-                id: 1,
-                name: 'Dima',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-            {
-                id: 2,
-                name: 'Valera',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-            {
-                id: 3,
-                name: 'Sveta',
-                img: 'https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51402215-stock-illustration-male-avatar-profile-picture-use.jpg'
-            },
-        ]
+    dispatch(action: ActionsTypes) {
+        if (action.type === 'ADD-POST') {
+            let newPost: PostsType = { id: 3, message: this._state.profilePage.newPostText, likeCount: 0 }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = '';
+            this.renderEntireTree()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.value;
+            this.renderEntireTree()
+        }else if( action.type = 'UPDATE-NEW-MESSAGE-BODY'){
+            this._state.dialogsPage.newMessageBody = action.body;
+            this.renderEntireTree()
+        }else if (action.type = 'SEND-MESSAGE'){
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({id:4,message:body});
+            this.renderEntireTree()         
+        }
     }
 }
 
-export const addPost = () =>{
-
-    let newPost:PostsType =  {id: 3, message: state.profilePage.newPostText, likeCount: 0}
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = '';
-
-    renderEntireTree()
+export const addPostActionCreator = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
 }
 
-export const updateNewPostText = (value:string) =>{
-
-    state.profilePage.newPostText = value;
-    renderEntireTree()
-
+export const updateNewPostTextActionCreator = (value: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT', value: value
+    } as const
 }
 
-export default state;
+export const sendMessageCreator = ()=>{
+    return{
+        type: 'SEND-MESSAGE'        
+    } as const
+}
+
+export const updateNewMessageBodyCreator = (value:string) =>{
+    return{
+        type: 'UPDATE-NEW-MESSAGE-BODY', body: value
+    } as const
+}
+
+export default store;
+
 

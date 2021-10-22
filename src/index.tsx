@@ -2,23 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, {subscribes} from './redux/state';
-
-import {addPost, RootStateType, updateNewPostText} from './redux/state';
+import store from './redux/state'
+import { BrowserRouter } from 'react-router-dom';
 
 export const renderEntireTree = () => {
     ReactDOM.render(
-        <React.StrictMode>
+        <BrowserRouter>
             <App
-                state={state}
-                addPost={addPost}
-                updateNewPostText={updateNewPostText}
+                state={store.getState()}
+                dispatch={store.dispatch.bind(store)}
+                store = {store}
             />
-        </React.StrictMode>,
+        </BrowserRouter>,
         document.getElementById('root')
     );
 }
 
-subscribes(renderEntireTree)
+store.subscribes(renderEntireTree)
 renderEntireTree()
 
