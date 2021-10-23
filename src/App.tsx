@@ -11,7 +11,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 type AppType = {
     state: RootStateType
     dispatch: (action: ActionsTypes) => void
-    store: storeType
 }
 
 function App(props: AppType) {
