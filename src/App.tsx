@@ -10,21 +10,22 @@ import {BrowserRouter, Route} from "react-router-dom";
 
 type AppType = {
     state: RootStateType
-    dispatch:(action:ActionsTypes)=>void
+    dispatch: (action: ActionsTypes) => void
     store: storeType
 }
 
 function App(props: AppType) {
     return (
-            <div className="app-wrapper">
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path={'/profile'} render={() => <Profile profilePage={props.state.profilePage}
-                                                                    dispatch={props.dispatch}/>}/>
-                    <Route path={'/dialogs'} render={() => <Dialog dialogsPage={props.state.dialogsPage}/>}/>
-                </div>
+        <div className="app-wrapper">
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Route path={'/profile'} render={() => <Profile profilePage={props.state.profilePage}
+                                                                dispatch={props.dispatch}/>}/>
+                <Route path={'/dialogs'} render={() => <Dialog dialogsPage={props.state.dialogsPage}
+                                                               dispatch={props.dispatch}/>}/>
             </div>
+        </div>
     );
 }
 

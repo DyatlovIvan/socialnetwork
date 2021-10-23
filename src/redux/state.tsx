@@ -2,10 +2,9 @@
 export type storeType = {
     _state: RootStateType
     renderEntireTree: () => void
-    addPost: () => void
-    updateNewPostText: (value: string) => void
+    //updateNewPostText: (value: string) => void
     subscribes: (callBack: () => void) => void
-    getState: ()=>void
+    getState: ()=> RootStateType
     dispatch: (action: ActionsTypes) => void
 }
 
@@ -149,14 +148,14 @@ const store:storeType = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.value;
             this.renderEntireTree()
-        }else if( action.type = 'UPDATE-NEW-MESSAGE-BODY'){
+        }else if( action.type === 'UPDATE-NEW-MESSAGE-BODY'){
             this._state.dialogsPage.newMessageBody = action.body;
             this.renderEntireTree()
-        }else if (action.type = 'SEND-MESSAGE'){
+        }else if (action.type === 'SEND-MESSAGE'){
             let body = this._state.dialogsPage.newMessageBody;
             this._state.dialogsPage.newMessageBody = '';
             this._state.dialogsPage.messages.push({id:4,message:body});
-            this.renderEntireTree()         
+            this.renderEntireTree()
         }
     }
 }

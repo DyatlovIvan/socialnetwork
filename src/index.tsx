@@ -9,7 +9,7 @@ export const renderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <App
-                state={store.getState()}
+              state={store.getState()}
                 dispatch={store.dispatch.bind(store)}
                 store = {store}
             />
@@ -17,6 +17,9 @@ export const renderEntireTree = () => {
         document.getElementById('root')
     );
 }
+
+console.log('stttore', store.getState())
+
 
 store.subscribes(renderEntireTree)
 renderEntireTree()

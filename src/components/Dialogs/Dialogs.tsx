@@ -1,24 +1,25 @@
 import style from './Dialogs.module.css'
-import { DialogsPageType, sendMessageCreator, updateNewMessageBodyCreator } from "../../redux/state";
+import {ActionsTypes, DialogsPageType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/state";
 import { DialogItem } from "./DialogItem/DialogItem";
 import { Message } from "./Message/Message";
 import { ChangeEvent } from 'react';
 
 type DialogType = {
     dialogsPage: DialogsPageType
+    dispatch: (action:ActionsTypes)=>void
 }
 
 export function Dialog(props: DialogType) {
     let dialogElements = props.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name} img={el.img} />)
     let messageElements = props.dialogsPage.messages.map(el => <Message id={el.id} message={el.message} />)
 
-    let newMessageBody = props.state.newMessageBody;
+    let newMessageBody = props.dialogsPage.newMessageBody;
     const onSendMessageClickHandler = () =>{
-        props.store.dispatch(sendMessageCreator());
+        props.dispatch(sendMessageCreator());
     }
     const onNewMessageChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
         let body = e.currentTarget.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body));
+        props.dispatch(updateNewMessageBodyCreator(body));
     } 
     return (
         <div className={style.dialogs}>
