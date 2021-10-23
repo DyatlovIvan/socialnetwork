@@ -1,14 +1,30 @@
+import {ActionsTypes, DialogsPageType} from "./state";
 
 
-const dialogsPageReducer = (state,action)=>{
+export const dialogsPageReducer = (state: DialogsPageType, action: ActionsTypes) => {
+    switch (action.type) {
+        case "UPDATE-NEW-MESSAGE-BODY":
+            state.newMessageBody = action.body;
+            return state
+        case "SEND-MESSAGE":
+            let body = state.newMessageBody;
+            state.newMessageBody = '';
+            state.messages.push({id: 4, message: body})
+            return state
+        default:
+            return state
 
-   if( action.type === 'UPDATE-NEW-MESSAGE-BODY'){
-       state.newMessageBody = action.body;
-    }else if (action.type === 'SEND-MESSAGE'){
-        let body = state.newMessageBody;
-       state.newMessageBody = '';
-       state.messages.push({id:4,message:body})
     }
+}
 
-    return state
+export const sendMessageCreator = ()=>{
+    return{
+        type: 'SEND-MESSAGE'
+    } as const
+}
+
+export const updateNewMessageBodyCreator = (value:string) =>{
+    return{
+        type: 'UPDATE-NEW-MESSAGE-BODY', body: value
+    } as const
 }

@@ -1,3 +1,5 @@
+import {addPostActionCreator, profilePageReducer, updateNewPostTextActionCreator} from "./profilePageReducer";
+import {dialogsPageReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsPageReducer";
 
 export type storeType = {
     _state: RootStateType
@@ -8,7 +10,7 @@ export type storeType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator> | 
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
                         ReturnType<typeof updateNewPostTextActionCreator> |
                         ReturnType<typeof sendMessageCreator>|
                         ReturnType<typeof updateNewMessageBodyCreator>
@@ -130,7 +132,7 @@ const store:storeType = {
         }
     },
     renderEntireTree() {
-        console.log('new text');
+
     },
 
     subscribes(callBack: () => void) {
@@ -140,48 +142,27 @@ const store:storeType = {
         return this._state
     },
     dispatch(action: ActionsTypes) {
-        if (action.type === 'ADD-POST') {
-            let newPost: PostsType = { id: 3, message: this._state.profilePage.newPostText, likeCount: 0 }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = '';
-            this.renderEntireTree()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.value;
-            this.renderEntireTree()
-        }else if( action.type === 'UPDATE-NEW-MESSAGE-BODY'){
-            this._state.dialogsPage.newMessageBody = action.body;
-            this.renderEntireTree()
-        }else if (action.type === 'SEND-MESSAGE'){
-            let body = this._state.dialogsPage.newMessageBody;
-            this._state.dialogsPage.newMessageBody = '';
-            this._state.dialogsPage.messages.push({id:4,message:body});
-            this.renderEntireTree()
-        }
+        this._state.profilePage = profilePageReducer(this._state.profilePage,action)
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage,action)
+        this.renderEntireTree()
+        // if (action.type === 'ADD-POST') {
+        //     let newPost: PostsType = { id: 3, message: this._state.profilePage.newPostText, likeCount: 0 }
+        //     this._state.profilePage.posts.push(newPost)
+        //     this._state.profilePage.newPostText = '';
+        //     this.renderEntireTree()
+        // } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        //     this._state.profilePage.newPostText = action.value;
+        //     this.renderEntireTree()
+        // }else if( action.type === 'UPDATE-NEW-MESSAGE-BODY'){
+        //     this._state.dialogsPage.newMessageBody = action.body;
+        //     this.renderEntireTree()
+        // }else if (action.type === 'SEND-MESSAGE'){
+        //     let body = this._state.dialogsPage.newMessageBody;
+        //     this._state.dialogsPage.newMessageBody = '';
+        //     this._state.dialogsPage.messages.push({id:4,message:body});
+        //     this.renderEntireTree()
+        // }
     }
-}
-
-export const addPostActionCreator = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-
-export const updateNewPostTextActionCreator = (value: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT', value: value
-    } as const
-}
-
-export const sendMessageCreator = ()=>{
-    return{
-        type: 'SEND-MESSAGE'        
-    } as const
-}
-
-export const updateNewMessageBodyCreator = (value:string) =>{
-    return{
-        type: 'UPDATE-NEW-MESSAGE-BODY', body: value
-    } as const
 }
 
 export default store;
