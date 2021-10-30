@@ -3,7 +3,9 @@ import {profilePageReducer} from "./profilePageReducer";
 import {dialogsPageReducer} from "./dialogsPageReducer";
 
 let reducers = combineReducers({
-    profilePageReducer,
-    dialogsPageReducer
+    profilePage: profilePageReducer,
+    dialogsPage: dialogsPageReducer
 })
-export let store = createStore();
+let store = createStore(reducers);
+
+export default store
