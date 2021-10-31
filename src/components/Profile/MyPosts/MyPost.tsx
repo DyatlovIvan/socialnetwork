@@ -8,23 +8,25 @@ import React, { ChangeEvent, RefObject } from "react";
 type MyPostType = {
     posts: PostsType[]
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    addPost: () =>void
+    updateNewPostText:(value:string)=>void
 }
 
 
 
 export function MyPost(props: MyPostType) {
-
     let postsElement = props.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount} />);
 
     const AddNewPostHandler = () => {
         //let text = props.newPostText
-        props.dispatch(addPostActionCreator())
+        //props.dispatch(addPostActionCreator())
+        props.addPost()
     }
     const onChangeNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // props.updateNewPostText(e.currentTarget.value)
         let value = e.currentTarget.value
-        props.dispatch(updateNewPostTextActionCreator(value))
+        //props.dispatch(updateNewPostTextActionCreator(value))
+        props.updateNewPostText(value)
 
     }
 

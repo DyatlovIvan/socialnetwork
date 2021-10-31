@@ -7,7 +7,9 @@ import { ChangeEvent } from 'react';
 
 type DialogType = {
     dialogsPage: DialogsPageType
-    dispatch: (action:ActionsTypes)=>void
+    sendMessage:()=>void
+    updateNewMessageBody:(body:string)=>void
+
 }
 
 export function Dialog(props: DialogType) {
@@ -16,11 +18,11 @@ export function Dialog(props: DialogType) {
 
     let newMessageBody = props.dialogsPage.newMessageBody;
     const onSendMessageClickHandler = () =>{
-        props.dispatch(sendMessageCreator());
+       props.sendMessage()
     }
     const onNewMessageChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
         let body = e.currentTarget.value;
-        props.dispatch(updateNewMessageBodyCreator(body));
+        props.updateNewMessageBody(body)
     } 
     return (
         <div className={style.dialogs}>

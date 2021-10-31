@@ -142,9 +142,12 @@ const store:storeType = {
         return this._state
     },
     dispatch(action: ActionsTypes) {
-        this._state.profilePage = profilePageReducer(this._state.profilePage,action)
-        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage,action)
+       // this._state.profilePage = profilePageReducer(this._state.profilePage,action)
+       // this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage,action)
         this.renderEntireTree()
+
+
+        /////////////////////////////////////////
         // if (action.type === 'ADD-POST') {
         //     let newPost: PostsType = { id: 3, message: this._state.profilePage.newPostText, likeCount: 0 }
         //     this._state.profilePage.posts.push(newPost)
