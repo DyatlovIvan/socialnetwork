@@ -1,15 +1,14 @@
 import style from './MyPost.module.css'
 import { Post } from "./Post/Post";
-import { ActionsTypes, PostsType} from "../../../redux/state";
-import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profilePageReducer";
+import {addPostActionCreator, PostsType, updateNewPostTextActionCreator} from "../../../redux/profilePageReducer";
 import React, { ChangeEvent, RefObject } from "react";
 
 
 type MyPostType = {
-    posts: PostsType[]
+    posts: Array<PostsType>
     newPostText: string
-    addPost: () =>void
-    updateNewPostText:(value:string)=>void
+    AddNewPostHandler: () =>void
+    onChangeNewPostHandler:(value:string)=>void
 }
 
 
@@ -20,13 +19,13 @@ export function MyPost(props: MyPostType) {
     const AddNewPostHandler = () => {
         //let text = props.newPostText
         //props.dispatch(addPostActionCreator())
-        props.addPost()
+        props.AddNewPostHandler()
     }
     const onChangeNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // props.updateNewPostText(e.currentTarget.value)
         let value = e.currentTarget.value
         //props.dispatch(updateNewPostTextActionCreator(value))
-        props.updateNewPostText(value)
+        props.onChangeNewPostHandler(value)
 
     }
 

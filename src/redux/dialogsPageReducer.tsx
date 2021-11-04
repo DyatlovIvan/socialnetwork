@@ -1,7 +1,7 @@
 
 
 
-type initialStateType = {
+export type initialStateType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
     newMessageBody:string

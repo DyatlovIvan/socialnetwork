@@ -1,10 +1,10 @@
 
-type InitialStateType = {
+export type InitialStateType = {
     posts: Array<PostsType>
     newPostText: string
 }
 
-type PostsType = {
+export type PostsType = {
     id: number
     message: string
     likeCount: number

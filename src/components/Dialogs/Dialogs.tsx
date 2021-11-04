@@ -1,15 +1,13 @@
 import style from './Dialogs.module.css'
-import {ActionsTypes, DialogsPageType} from "../../redux/state";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogsPageReducer";
 import { DialogItem } from "./DialogItem/DialogItem";
 import { Message } from "./Message/Message";
 import { ChangeEvent } from 'react';
+import {DialogsPageType} from "../../redux/state";
 
 type DialogType = {
     dialogsPage: DialogsPageType
-    sendMessage:()=>void
-    updateNewMessageBody:(body:string)=>void
-
+    onSendMessageClickHandler: () => void
+    onNewMessageChangeHandler: (body: string) => void
 }
 
 export function Dialog(props: DialogType) {
@@ -18,11 +16,13 @@ export function Dialog(props: DialogType) {
 
     let newMessageBody = props.dialogsPage.newMessageBody;
     const onSendMessageClickHandler = () =>{
-       props.sendMessage()
+        debugger
+       props.onSendMessageClickHandler()
     }
     const onNewMessageChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
+        debugger
         let body = e.currentTarget.value;
-        props.updateNewMessageBody(body)
+        props.onNewMessageChangeHandler(body)
     } 
     return (
         <div className={style.dialogs}>

@@ -9,23 +9,23 @@ import {RootStoreType, StoreType} from "./redux/redux-store";
 import {DialogContainer} from "./components/Dialogs/DialogsContainer";
 
 
-type AppType = {
+// type AppType = {
+//
+//     store: StoreType
+// }
 
-    store: StoreType
-}
-
-function App(props: AppType) {
+function App() {
 
     return (
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path={'/profile'} render={() => <Profile store={props.store}
+                <Route path={'/profile'} render={() => <Profile
                     // profilePage={props.state.profilePage}
                     // dispatch={props.dispatch}
                 />}/>
-                <Route path={'/dialogs'} render={() => <DialogContainer store={props.store}/>}/>
+                <Route path={'/dialogs'} render={() => <DialogContainer/>}/>
             </div>
         </div>
     );
