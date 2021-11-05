@@ -7,6 +7,7 @@ export type UsersType = {
     id: number
     followed:boolean
     fullName:string
+    photoUrl:string
     status:string
     location:{
         city:string
@@ -16,10 +17,14 @@ export type UsersType = {
 
 const initialState: InitialStateType = {
     users: [
-        {id: 1, followed:true, fullName:'Dmitry',status: 'Im ok',location:{city:'Moscow',country:'Russia'}},
-        {id: 2, followed:false, fullName:'Ivan',status: 'Im ok too',location:{city:'Minsk',country:'Belarus'}},
-        {id: 3, followed:false, fullName:'Alex',status: 'Im ok too!',location:{city:'Moscow',country:'Russia'}},
-        {id: 4, followed:false, fullName:'Andrew',status: 'OK',location:{city:'Kiev',country:'Ukraine'}}
+        {id: 1, followed:true, fullName:'Dmitry', photoUrl:'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
+            status: 'Im ok',location:{city:'Moscow',country:'Russia'}},
+        {id: 2, followed:false, fullName:'Ivan', photoUrl:'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
+            status: 'Im ok too',location:{city:'Minsk',country:'Belarus'}},
+        {id: 3, followed:false, fullName:'Alex', photoUrl:'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
+            status: 'Im ok too!',location:{city:'Moscow',country:'Russia'}},
+        {id: 4, followed:false, fullName:'Andrew', photoUrl:'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
+            status: 'OK',location:{city:'Kiev',country:'Ukraine'}}
     ]
 }
 
