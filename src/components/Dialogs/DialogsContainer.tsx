@@ -1,6 +1,6 @@
 import {initialStateType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogsPageReducer";
 import {Dialog} from "./Dialogs";
-import {RootStoreType, StoreType} from "../../redux/redux-store";
+import {RootStoreType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
