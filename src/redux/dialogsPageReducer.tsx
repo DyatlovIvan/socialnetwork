@@ -62,13 +62,10 @@ const initialState = {
 export const dialogsPageReducer = (state = initialState, action: ActionsTypes):initialStateType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.body;
-            return state
+            return {...state,newMessageBody: action.body}
         case "SEND-MESSAGE":
             let body = state.newMessageBody;
-            state.newMessageBody = '';
-            state.messages.push({id: 4, message: body})
-            return state
+            return {...state,newMessageBody:'',messages:[...state.messages,{id: 4, message: body}]}
         default:
             return state
 

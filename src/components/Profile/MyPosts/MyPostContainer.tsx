@@ -5,7 +5,6 @@ import {Dispatch} from "redux";
 import {RootStoreType} from "../../../redux/redux-store";
 
 
-
 // export const MyPostContainer = (props:MyPostContainerType) =>{
 //     const state = props.store.getState()
 //
@@ -32,28 +31,27 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    AddNewPostHandler: ()=>void
-    onChangeNewPostHandler: (value:string)=>void
+    AddNewPostHandler: () => void
+    onChangeNewPostHandler: (value: string) => void
 }
 
-const mapStateToProps = (state:RootStoreType):mapStateToPropsType =>{
-  return{
-      posts:state.profilePage.posts,
-      newPostText:state.profilePage.newPostText
-  }
+const mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
+    }
 }
 
-const mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType =>{
-    return{
-        AddNewPostHandler:() => {
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        AddNewPostHandler: () => {
             dispatch(addPostActionCreator())
         },
-        onChangeNewPostHandler:(value:string) => {
+        onChangeNewPostHandler: (value: string) => {
             dispatch(updateNewPostTextActionCreator(value))
         }
     }
 }
 
 
-
-export const MyPostContainer = connect(mapStateToProps,mapDispatchToProps)(MyPost);
+export const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost);

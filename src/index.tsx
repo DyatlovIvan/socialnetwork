@@ -6,8 +6,6 @@ import store, {RootStoreType, StoreType} from './redux/redux-store'
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
 
-
-export const renderEntireTree = (state: RootStoreType) => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -18,9 +16,3 @@ export const renderEntireTree = (state: RootStoreType) => {
         </BrowserRouter>,
         document.getElementById('root')
     );
-}
-renderEntireTree(store.getState())
-store.subscribe(() => renderEntireTree(store.getState()))
-
-
-
