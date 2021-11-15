@@ -4,11 +4,15 @@ export type InitialStateType = {
 }
 
 export type UsersType = {
+    name:string
     id: number
+    uniqueUrlName:string|null
+    photos:{
+        small:string
+        large:string
+    }
+    status:string|null
     followed:boolean
-    fullName:string
-    photoUrl:string
-    status:string
     location:{
         city:string
         country:string

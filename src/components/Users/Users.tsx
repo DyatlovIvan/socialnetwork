@@ -1,6 +1,8 @@
 import {UsersType} from "../../redux/usersReducer";
 import s from './Users.module.css'
-
+import axios from "axios";
+import React from "react";
+import userPhoto from '../../assets/images/userPhoto.png'
 
 type UsersPresentType = {
     users: Array<UsersType>
@@ -8,61 +10,35 @@ type UsersPresentType = {
     unfollow: (userId: number) => void
     setUsers: (users: Array<UsersType>) => void
 }
-export const Users = (props: UsersPresentType) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                followed: true,
-                fullName: 'Dmitry',
-                photoUrl: 'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
-                status: 'Im ok',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: 2,
-                followed: false,
-                fullName: 'Ivan',
-                photoUrl: 'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
-                status: 'Im ok too',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: 3,
-                followed: false,
-                fullName: 'Alex',
-                photoUrl: 'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
-                status: 'Im ok too!',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: 4,
-                followed: false,
-                fullName: 'Andrew',
-                photoUrl: 'https://i.pinimg.com/474x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg',
-                status: 'OK',
-                location: {city: 'Kiev', country: 'Ukraine'}
-            }
-        ])
+
+export class Users extends React.Component<UsersPresentType> {
+    getUsers = () => {
+        debugger
+        if (this.props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                this.props.setUsers(response.data.items)
+            })
+        }
     }
 
-    return (
-        <div>
-            {props.users.map(el => <div key={el.id}>
+    render() {
+        return <div>
+            <button onClick={this.getUsers}>Get Users</button>
+            {this.props.users.map(el => <div key={el.id}>
                 <span>
                     <div>
-                        <img className={s.usersPhoto} src={el.photoUrl}/>
+                        <img className={s.usersPhoto} src={el.photos.small===null?userPhoto:el.photos.small}/>
                     </div>
                     <div>
                         {el.followed ?
-                            <button onClick={() => props.unfollow(el.id)}>Unfollow</button>
-                            : <button onClick={() => props.follow(el.id)}>Follow</button>}
+                            <button onClick={() => this.props.unfollow(el.id)}>Unfollow</button>
+                            : <button onClick={() => this.props.follow(el.id)}>Follow</button>}
                     </div>
                 </span>
                 <span>
                     <span>
                         <div>
-                            {el.fullName}
+                            {el.name}
                         </div>
                         <div>
                             {el.status}
@@ -70,14 +46,15 @@ export const Users = (props: UsersPresentType) => {
                     </span>
                     <span>
                         <div>
-                            {el.location.country}
+                            {'Russia'}
                         </div>
                         <div>
-                            {el.location.city}
+                            {'City'}
                         </div>
                     </span>
                 </span>
             </div>)}
         </div>
-    )
+    }
 }
+
