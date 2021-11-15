@@ -11,6 +11,9 @@ export function Navbar(){
             <div className={style.item}>
                 <NavLink to = 'dialogs'>Messages</NavLink>
             </div>
+            <div className={style.item}>
+                <NavLink to = 'users'>Users</NavLink>
+            </div>
             <div className={style.item}>News</div>
             <div className={style.item}>Music</div>
             <div className={style.item}>Settings</div>
