@@ -12,46 +12,19 @@ import {
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
+import preloader from '../../assets/images/preloader.svg'
 
 type UsersPresentType = {
     users: Array<UsersType>
     totalUserCount: number
     pageSize: number
     currentPage: number
+    isFetching:boolean
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
-}
-
-const mapStateToProps = (state:RootStoreType) =>{
-  return{
-      users: state.usersPage.users,
-      pageSize: state.usersPage.pageSize,
-      totalUserCount: state.usersPage.totalUserCount,
-      currentPage:state.usersPage.currentPage
-  }
-}
-
-const mapDispatchToProps = (dispatch:Dispatch) =>{
- return{
-     follow:(userId:number)=>{
-         dispatch(followAC(userId))
-     },
-     unfollow:(userId:number)=>{
-         dispatch(unfollowAC(userId))
-     },
-     setUsers:(users:Array<UsersType>)=>{
-         dispatch(setUsersAC(users))
-     },
-     setCurrentPage:(currentPage:number)=>{
-         dispatch(setCurrentPageAC(currentPage))
-     },
-     setTotalUsersCount:(totalUsersCount:number)=>{
-         dispatch(setTotalUsersCountAC(totalUsersCount))
-     }
- }
 }
 
 class UsersContainer extends React.Component<UsersPresentType> {
@@ -72,16 +45,48 @@ class UsersContainer extends React.Component<UsersPresentType> {
 
     render() {
 
-        return <Users totalUserCount = {this.props.totalUserCount}
-                      pageSize = {this.props.pageSize}
-                      users = {this.props.users}
-                      currentPage = {this.props.currentPage}
-                      onPageChanged = {this.onPageChanged}
-                      follow = {this.props.follow}
-                      unfollow = {this.props.unfollow}
-        />
+        return <>
+            {this.props.isFetching?<img src={preloader}/>:null}
+            <Users totalUserCount={this.props.totalUserCount}
+                   pageSize={this.props.pageSize}
+                   users={this.props.users}
+                   currentPage={this.props.currentPage}
+                   onPageChanged={this.onPageChanged}
+                   follow={this.props.follow}
+                   unfollow={this.props.unfollow}
+            />
+        </>
 
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(UsersContainer)
+const mapStateToProps = (state: RootStoreType) => {
+    return {
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUserCount: state.usersPage.totalUserCount,
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
+    }
+}
+const mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        follow: (userId: number) => {
+            dispatch(followAC(userId))
+        },
+        unfollow: (userId: number) => {
+            dispatch(unfollowAC(userId))
+        },
+        setUsers: (users: Array<UsersType>) => {
+            dispatch(setUsersAC(users))
+        },
+        setCurrentPage: (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage))
+        },
+        setTotalUsersCount: (totalUsersCount: number) => {
+            dispatch(setTotalUsersCountAC(totalUsersCount))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
