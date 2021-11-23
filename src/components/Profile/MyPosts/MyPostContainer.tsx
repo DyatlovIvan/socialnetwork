@@ -1,5 +1,5 @@
 import {MyPost} from "./MyPost";
-import {addPostActionCreator, PostsType, updateNewPostTextActionCreator} from "../../../redux/profilePageReducer";
+import {addPost, PostsType, updateNewPostText} from "../../../redux/profilePageReducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {RootStoreType} from "../../../redux/redux-store";
@@ -45,10 +45,10 @@ const mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         AddNewPostHandler: () => {
-            dispatch(addPostActionCreator())
+            dispatch(addPost())
         },
         onChangeNewPostHandler: (value: string) => {
-            dispatch(updateNewPostTextActionCreator(value))
+            dispatch(updateNewPostText(value))
         }
     }
 }

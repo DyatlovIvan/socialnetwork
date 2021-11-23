@@ -1,4 +1,4 @@
-import {addPostActionCreator, profilePageReducer, updateNewPostTextActionCreator} from "./profilePageReducer";
+import {addPost, profilePageReducer, updateNewPostText} from "./profilePageReducer";
 import {dialogsPageReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsPageReducer";
 
 export type storeType = {
@@ -10,8 +10,8 @@ export type storeType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator> |
-                        ReturnType<typeof updateNewPostTextActionCreator> |
+export type ActionsTypes = ReturnType<typeof addPost> |
+                        ReturnType<typeof updateNewPostText> |
                         ReturnType<typeof sendMessageCreator>|
                         ReturnType<typeof updateNewMessageBodyCreator>
 

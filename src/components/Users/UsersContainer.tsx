@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
 import {RootStoreType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
@@ -12,7 +11,6 @@ import {
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from '../../assets/images/preloader.svg'
 import {Preloader} from "../../common/preloader/Preloader";
 
 type UsersPresentType = {
