@@ -39,7 +39,7 @@ export const Users = (props: PropsType) => {
             {props.users.map(el => <div key={el.id}>
                 <span>
                     <div>
-                        <NavLink to={'profile/' + el.id}>
+                        <NavLink to={'/profile/' + el.id}>
                             <img className={s.usersPhoto} src={el.photos.small === null ? userPhoto : el.photos.small}/>
                         </NavLink>
                     </div>

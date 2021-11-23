@@ -6,13 +6,13 @@ export function Navbar(){
         <nav className={style.nav}>
 
             <div className={style.item}>
-                <NavLink to = 'profile'>Profile</NavLink>
+                <NavLink to = '/profile'>Profile</NavLink>
             </div>
             <div className={style.item}>
-                <NavLink to = 'dialogs'>Messages</NavLink>
+                <NavLink to = '/dialogs'>Messages</NavLink>
             </div>
             <div className={style.item}>
-                <NavLink to = 'users'>Users</NavLink>
+                <NavLink to = '/users'>Users</NavLink>
             </div>
             <div className={style.item}>News</div>
             <div className={style.item}>Music</div>

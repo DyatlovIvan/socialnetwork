@@ -4,7 +4,7 @@ import {ProfileType} from "../../redux/profilePageReducer";
 
 
 type PropsType = {
-    profile:ProfileType
+    profile:ProfileType|null
 }
 export function Profile(props:PropsType){
     return(

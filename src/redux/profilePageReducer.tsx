@@ -78,7 +78,7 @@ export const updateNewPostText = (value: string) => {
 }
 
 type setUserProfileType  =ReturnType<typeof setUserProfile>
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET_USER_PROFILE', profile
     } as const
