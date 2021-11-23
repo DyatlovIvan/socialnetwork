@@ -60,46 +60,46 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
     }
 }
 
-type ActionsTypes = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType |
-    toggleIsFetchingACType
+type ActionsTypes = followType | unfollowType | setUsersType | setCurrentPageType | setTotalUsersCountType |
+    toggleIsFetchingType
 
-type followACType = ReturnType<typeof followAC>
-export const followAC = (userId: number) => {
+type followType = ReturnType<typeof follow>
+export const follow = (userId: number) => {
     return {
         type: 'FOLLOW', userId
     } as const
 }
 
 // type ActionCommonType = ReturnType<typeof addPostActionCreator> |  ReturnType<typeof updateNewPostTextActionCreator>
-type unfollowACType = ReturnType<typeof unfollowAC>
-export const unfollowAC = (userId: number) => {
+type unfollowType = ReturnType<typeof unfollow>
+export const unfollow = (userId: number) => {
     return {
         type: 'UNFOLLOW', userId
     } as const
 }
 
-type setUsersACType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: Array<UsersType>) => {
+type setUsersType = ReturnType<typeof setUsers>
+export const setUsers = (users: Array<UsersType>) => {
     return {
         type: 'SET_USERS', users
     } as const
 }
 
-type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export const setCurrentPageAC = (currentPage: number) => {
+type setCurrentPageType = ReturnType<typeof setCurrentPage>
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET_CURRENT_PAGE', currentPage
     } as const
 }
 
-type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export const setTotalUsersCountAC = (totalUsersCount: number) => {
+type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: 'SET_TOTAL_USERS_COUNT', totalUsersCount
     } as const
 }
-type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+type toggleIsFetchingType = ReturnType<typeof toggleIsFetching>
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: 'TOGGLE_IS_FETCHING', isFetching
     } as const
