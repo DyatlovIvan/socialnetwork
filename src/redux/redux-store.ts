@@ -16,3 +16,6 @@ export type RootStoreType = ReturnType<typeof reducers>
 export type StoreType = typeof store
 
 export default store
+
+// @ts-ignore
+window.store = store
