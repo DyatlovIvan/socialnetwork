@@ -6,24 +6,18 @@ import {setAuthUserData} from "../../redux/authReducer";
 import {RouteComponentProps, withRouter} from "react-router";
 import {RootStoreType} from "../../redux/redux-store";
 
-type PathParamsType = {
-    id:string
-    email:string
-    login:string
-}
 
-type ownPropsType = mapStateToProps & mapDispatchPropsType
+
+
 type mapStateToProps = {
     isAuth:boolean
-    login:string
+    login:string|null
 }
 type mapDispatchPropsType = {
     setAuthUserData:(userId:string,email:string,login:string)=>void
 }
 
-
-type PropsType = RouteComponentProps<PathParamsType>&ownPropsType
-class HeaderContainer extends React.Component<any> {
+class HeaderContainer extends React.Component<mapStateToProps & mapDispatchPropsType> {
 
     componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',
@@ -51,5 +45,4 @@ const mapStateToProps = (state: RootStoreType) => {
     }
 }
 
-// let WithUrlDataContainerComponent = withRouter(HeaderContainer)
 export default connect(mapStateToProps, {setAuthUserData})(HeaderContainer)
