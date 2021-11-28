@@ -18,20 +18,23 @@ type UsersPresentType = {
     totalUserCount: number
     pageSize: number
     currentPage: number
-    isFetching:boolean
+    isFetching: boolean
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
-    toggleIsFetching:(isFetching:boolean)=>void
+    toggleIsFetching: (isFetching: boolean) => void
 }
 
 class UsersContainer extends React.Component<UsersPresentType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -41,7 +44,10 @@ class UsersContainer extends React.Component<UsersPresentType> {
     onPageChanged = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            }).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
@@ -50,7 +56,7 @@ class UsersContainer extends React.Component<UsersPresentType> {
     render() {
 
         return <>
-            {this.props.isFetching?<Preloader/>:null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users totalUserCount={this.props.totalUserCount}
                    pageSize={this.props.pageSize}
                    users={this.props.users}

@@ -13,7 +13,7 @@ export function ProfileInfo(props:PropsType){
     return(
      <div>
          <div className={style.headLayer}>
-             <img src='https://vjoy.cc/wp-content/uploads/2019/07/1-1.jpg'/>
+             <img src='https://telecomdom.com/wp-content/uploads/2019/12/shapka_for_youtube-fon-9.jpg'/>
          </div>
          <div className={style.descriptionBlock}>
              <img src= {props.profile.photos.small}/>
