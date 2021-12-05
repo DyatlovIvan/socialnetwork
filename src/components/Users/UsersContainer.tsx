@@ -47,10 +47,8 @@ class UsersContainer extends React.Component<UsersPresentType> {
                    users={this.props.users}
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
-                   followSuccess={this.props.followSuccess}
                    unfollowSuccess={this.props.unfollowSuccess}
                    followingInProgress={this.props.followingInProgress}
-                   toggleFollowingInProgress={this.props.toggleFollowingInProgress}
                    follow = {this.props.follow}
                    unfollow = {this.props.unfollow}
             />
