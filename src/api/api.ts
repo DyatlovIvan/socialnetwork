@@ -32,10 +32,13 @@ export const followAPI = {
 
 export const authAPI = {
     getAuth() {
-        return instanse.get('auth/me',
-           ).then(response =>{
-               return response.data
-        })
+        return instanse.get('auth/me')
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId:string){
+       return instanse.get(`profile/`+userId)
     }
 }
 

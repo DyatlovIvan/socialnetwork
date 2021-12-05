@@ -7,6 +7,7 @@ type PropsType = {
 }
 
 export function ProfileInfo(props:PropsType){
+
     if(!props.profile){
         return <Preloader/>
     }

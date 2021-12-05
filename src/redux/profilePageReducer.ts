@@ -1,3 +1,5 @@
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/api";
 
 export type InitialStateType = {
     posts: Array<PostsType>
@@ -78,8 +80,15 @@ export const updateNewPostText = (value: string) => {
 }
 
 type setUserProfileType  =ReturnType<typeof setUserProfile>
-export const setUserProfile = (profile: ProfileType) => {
+const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET_USER_PROFILE', profile
     } as const
 }
+export const getUserProfile = (userId:string)=>{
+    return(dispatch:Dispatch)=> {
+        profileAPI.getProfile(userId)
+            .then(response => {
+                setUserProfile(response.data)
+            })
+    }}
