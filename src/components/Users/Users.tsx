@@ -28,9 +28,6 @@ export const Users = (props: PropsType) => {
         pages.push(i);
     }
 
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div>
             <div>

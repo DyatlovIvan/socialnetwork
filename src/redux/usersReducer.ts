@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export type UsersType = {
     name: string
     id: number
@@ -58,26 +61,26 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
         }
         case "TOGGLE_FOLLOWING_IN_PROGRESS": {
             return action.isFetching ? {...state, followingInProgress: [...state.followingInProgress, action.userId]}
-                : {...state, followingInProgress:state.followingInProgress.filter(el=>el!==action.userId)}
+                : {...state, followingInProgress: state.followingInProgress.filter(el => el !== action.userId)}
         }
         default:
             return state
     }
 }
 
-type ActionsTypes = followType | unfollowType | setUsersType | setCurrentPageType | setTotalUsersCountType |
+type ActionsTypes = followSuccessType | unfollowSuccessType | setUsersType | setCurrentPageType | setTotalUsersCountType |
     toggleIsFetchingType | toggleFollowingInProgressType
 
-type followType = ReturnType<typeof follow>
-export const follow = (userId: number) => {
+type followSuccessType = ReturnType<typeof followSuccess>
+export const followSuccess = (userId: number) => {
     return {
         type: 'FOLLOW', userId
     } as const
 }
 
 // type ActionCommonType = ReturnType<typeof addPostActionCreator> |  ReturnType<typeof updateNewPostTextActionCreator>
-type unfollowType = ReturnType<typeof unfollow>
-export const unfollow = (userId: number) => {
+type unfollowSuccessType = ReturnType<typeof unfollowSuccess>
+export const unfollowSuccess = (userId: number) => {
     return {
         type: 'UNFOLLOW', userId
     } as const
@@ -115,4 +118,27 @@ export const toggleFollowingInProgress = (isFetching: boolean, userId: number) =
     return {
         type: 'TOGGLE_FOLLOWING_IN_PROGRESS', isFetching, userId
     } as const
+}
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsersCount(data.totalCount))
+        })
+
+    }
+}
+
+export const onPageChangedThunkCreator = (pageNumber:number,pageSize:number)=>{
+    return(dispatch:Dispatch)=>{
+        dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(pageNumber))
+        usersAPI.getUsers(pageNumber, pageSize).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+        })
+    }
 }
