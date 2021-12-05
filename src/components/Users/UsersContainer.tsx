@@ -2,10 +2,8 @@ import {connect} from "react-redux";
 import {RootStoreType} from "../../redux/redux-store";
 import {
     followSuccess, getUsersThunkCreator, onPageChangedThunkCreator,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleFollowingInProgress, toggleIsFetching,
-    unfollowSuccess,
+    toggleFollowingInProgress,
+    unfollowSuccess,follow,unfollow,
     UsersType
 } from "../../redux/usersReducer";
 import React from "react";
@@ -25,6 +23,8 @@ type UsersPresentType = {
     toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
     onPageChangedThunkCreator: (pageNumber: number, pageSize: number) => void
+    follow:(userId:number) => void
+    unfollow:(userId:number) => void
 }
 
 class UsersContainer extends React.Component<UsersPresentType> {
@@ -38,7 +38,6 @@ class UsersContainer extends React.Component<UsersPresentType> {
         this.props.onPageChangedThunkCreator(pageNumber, this.props.pageSize)
     }
 
-
     render() {
 
         return <>
@@ -48,10 +47,12 @@ class UsersContainer extends React.Component<UsersPresentType> {
                    users={this.props.users}
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
-                   follow={this.props.followSuccess}
-                   unfollow={this.props.unfollowSuccess}
+                   followSuccess={this.props.followSuccess}
+                   unfollowSuccess={this.props.unfollowSuccess}
                    followingInProgress={this.props.followingInProgress}
                    toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                   follow = {this.props.follow}
+                   unfollow = {this.props.unfollow}
             />
         </>
 
@@ -72,5 +73,5 @@ const mapStateToProps = (state: RootStoreType) => {
 export default connect(mapStateToProps, {
     followSuccess, unfollowSuccess,
     toggleFollowingInProgress,
-    getUsersThunkCreator, onPageChangedThunkCreator
+    getUsersThunkCreator, onPageChangedThunkCreator,follow,unfollow
 })(UsersContainer)
