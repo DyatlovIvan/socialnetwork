@@ -37,8 +37,8 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userId:string){
-       return instanse.get(`profile/`+userId)
+    getProfile(userId: number){
+       return instanse.get(`profile/${userId}`)
     }
 }
 

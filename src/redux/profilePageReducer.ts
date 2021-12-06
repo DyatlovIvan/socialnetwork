@@ -85,10 +85,10 @@ const setUserProfile = (profile: ProfileType) => {
         type: 'SET_USER_PROFILE', profile
     } as const
 }
-export const getUserProfile = (userId:string)=>{
+export const getUserProfile = (userId: number)=>{
     return(dispatch:Dispatch)=> {
         profileAPI.getProfile(userId)
             .then(response => {
-                setUserProfile(response.data)
+               dispatch(setUserProfile(response.data))
             })
     }}
