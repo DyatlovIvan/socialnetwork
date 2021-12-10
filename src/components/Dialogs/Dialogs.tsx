@@ -26,7 +26,6 @@ export function Dialog(props: DialogType) {
         let body = e.currentTarget.value;
         props.onNewMessageChangeHandler(body)
     }
-     if (!props.isAuth) return <Redirect to={'/login'}/>;
     return (
         <div className={style.dialogs}>
 
