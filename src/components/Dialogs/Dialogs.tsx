@@ -12,7 +12,7 @@ type DialogType = {
     onNewMessageChangeHandler: (body: string) => void
 }
 
-export function Dialog(props: DialogType) {
+export function Dialogs(props: DialogType) {
     let dialogElements = props.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name} img={el.img} />)
     let messageElements = props.dialogsPage.messages.map(el => <Message id={el.id} message={el.message} />)
 
