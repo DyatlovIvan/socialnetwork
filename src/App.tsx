@@ -17,12 +17,12 @@ const App = () => {
         <div className="app-wrapper">
             <HeaderContainer/>
             <Navbar/>
-            <div className='app-wrapper-content'>
+            <div className="app-wrapper-content">
                 <Switch>
-                <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                <Route path={'/dialogs'} render={() => <DialogContainer/>}/>
-                <Route path={'/users'} render={() => <UsersContainer/>}/>
-                <Route path={'/login'} render={() => <Login/>}/>
+                <Route path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
+                <Route path={"/dialogs"} render={() => <DialogContainer/>}/>
+                <Route path={"/users"} render={() => <UsersContainer/>}/>
+                <Route path={"/login"} render={() => <Login/>}/>
                 </Switch>
             </div>
         </div>
