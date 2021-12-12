@@ -5,7 +5,10 @@ type PathParamsType = {
     updateStatus: (status: string) => void
 }
 
-
+type prevStateType = {
+    editMode: boolean
+    status: string
+}
 export class ProfileStatus extends React.Component<PathParamsType> {
     state = {
         editMode: false,
@@ -34,6 +37,13 @@ export class ProfileStatus extends React.Component<PathParamsType> {
         this.setState({
             status:e.currentTarget.value
         })
+    }
+    componentDidUpdate(prevProps:PathParamsType,prevState:prevStateType) {
+        if (prevProps.status !== this.props.status){
+            this.setState({
+                status:this.props.status
+            })
+        }
     }
 
     render() {
