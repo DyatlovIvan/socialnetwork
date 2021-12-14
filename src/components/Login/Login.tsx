@@ -16,43 +16,49 @@ export const Login = () => {
 
 
 const LoginForm = () => {
-    const validate = (values: any) => {
-        const errors = {};
-        return errors;
-    }
-    const onSubmit = (values: valuesType, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
-        debugger
-        setTimeout(() => {
+    const formik = useFormik({
+        initialValues: {
+            login: '', password: '',rememberMe:false
+        },
+        onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-        }, 400);
-    }
+        },
+    });
 
     return (
         <div>
-            <Formik
-                initialValues={{login: '', password: '',rememberMe:false}}
-                validate={validate}
-                onSubmit={onSubmit}
-            >
-                {({isSubmitting}) => (
-                    <Form>
-                        <div>
-                            <Field type="login" name="login"/>
-                            <ErrorMessage name="login" component="div"/>
-                        </div>
-                        <div><Field type="password" name="password"/>
-                            <ErrorMessage name="password" component="div"/>
-                        </div>
-                        <div>
-                            <Field type = "checkbox" name = "rememberMe"/> remember me
-                        </div>
-                        <button type="submit" disabled={isSubmitting}>
-                            Login
-                        </button>
-                    </Form>
-                )}
-            </Formik>
+            <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="login">login</label>
+                <input
+                    id="login"
+                    name="login"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.login}
+                />
+
+                <label htmlFor="password">password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                />
+
+                <label>remember me</label>
+                <input
+                    id="rememberMe"
+                    name="rememberMe"
+                    type="checkbox"
+                    onChange={formik.handleChange}
+                    checked={formik.values.rememberMe}
+                />
+
+
+
+                <button type="submit">Submit</button>
+            </form>
         </div>)
 
 }
