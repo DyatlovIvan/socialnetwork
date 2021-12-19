@@ -1,54 +1,29 @@
 import {MyPost} from "./MyPost";
-import {addPost, PostsType, updateNewPostText} from "../../../redux/profilePageReducer";
+import {addPost, PostsType} from "../../../redux/profilePageReducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {RootStoreType} from "../../../redux/redux-store";
 
 
-// export const MyPostContainer = (props:MyPostContainerType) =>{
-//     const state = props.store.getState()
-//
-//     const AddNewPostHandler = () => {
-//         props.store.dispatch(addPostActionCreator())
-//     }
-//
-//     const onChangeNewPostHandler = (value:string) => {
-//         props.store.dispatch(updateNewPostTextActionCreator(value))
-//     }
-//
-//     return(
-//
-//         <MyPost posts={state.profilePage.posts}
-//                 newPostText={state.profilePage.newPostText}
-//                 addPost = {AddNewPostHandler}
-//                 updateNewPostText ={onChangeNewPostHandler}/>
-//     )
-// }
-
 type mapStateToPropsType = {
     posts: Array<PostsType>
-    newPostText: string
 }
 
 type mapDispatchToPropsType = {
-    AddNewPostHandler: () => void
-    onChangeNewPostHandler: (value: string) => void
+    AddNewPostHandler: (newPostText:string) => void
+    //onChangeNewPostHandler: (value: string) => void
 }
 
 const mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
     return {
-        posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        posts: state.profilePage.posts
     }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        AddNewPostHandler: () => {
-            dispatch(addPost())
-        },
-        onChangeNewPostHandler: (value: string) => {
-            dispatch(updateNewPostText(value))
+        AddNewPostHandler: (newPostText) => {
+            dispatch(addPost(newPostText))
         }
     }
 }

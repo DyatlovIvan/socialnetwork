@@ -1,8 +1,9 @@
-import {ErrorMessage, Field, Form, Formik, useFormik} from "formik";
+import {useFormik} from "formik";
+
 type valuesType = {
     login: string
     password: string
-    rememberMe:boolean
+    rememberMe: boolean
 }
 
 export const Login = () => {
@@ -18,7 +19,7 @@ export const Login = () => {
 const LoginForm = () => {
     const formik = useFormik({
         initialValues: {
-            login: '', password: '',rememberMe:false
+            login: '', password: '', rememberMe: false
         },
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
@@ -26,27 +27,30 @@ const LoginForm = () => {
     });
 
     return (
-        <div>
-            <form onSubmit={formik.handleSubmit}>
-                <label htmlFor="login">login</label>
+        <form onSubmit={formik.handleSubmit}>
+            <div>
                 <input
+                    placeholder="login"
                     id="login"
                     name="login"
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.login}
                 />
+            </div>
 
-                <label htmlFor="password">password</label>
+            <div>
                 <input
+                    placeholder="password"
                     id="password"
                     name="password"
                     type="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 />
+            </div>
 
-                <label>remember me</label>
+            <div>
                 <input
                     id="rememberMe"
                     name="rememberMe"
@@ -54,11 +58,10 @@ const LoginForm = () => {
                     onChange={formik.handleChange}
                     checked={formik.values.rememberMe}
                 />
+                <label>remember me</label>
+            </div>
 
-
-
-                <button type="submit">Submit</button>
-            </form>
-        </div>)
-
+            <button type="submit">Submit</button>
+        </form>
+    )
 }

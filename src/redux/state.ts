@@ -1,5 +1,5 @@
-import {addPost, profilePageReducer, updateNewPostText} from "./profilePageReducer";
-import {dialogsPageReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogsPageReducer";
+import {addPost} from "./profilePageReducer";
+import {sendMessageCreator} from "./dialogsPageReducer";
 
 export type storeType = {
     _state: RootStateType
@@ -11,9 +11,8 @@ export type storeType = {
 }
 
 export type ActionsTypes = ReturnType<typeof addPost> |
-                        ReturnType<typeof updateNewPostText> |
-                        ReturnType<typeof sendMessageCreator>|
-                        ReturnType<typeof updateNewMessageBodyCreator>
+                        ReturnType<typeof sendMessageCreator>
+
 
 
 export type PostsType = {
