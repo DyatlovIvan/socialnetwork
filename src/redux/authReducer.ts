@@ -46,13 +46,24 @@ export const getAuthUserData = () => (dispatch: Dispatch<AuthActionsType>) => {
     })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean): AppThunk => {
-    return (dispatch) => {
-        authAPI.login(email, password, rememberMe)
-            .then((res) => {
-                if (res.data.resultCode === 0) {
-                    dispatch(getAuthUserData())
-                }
-            })
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => async dispatch => {
+    try {
+        const res = await authAPI.login(email, password, rememberMe)
+        if (res.data.resultCode === 0) {
+            dispatch(getAuthUserData())
+        }
+    } catch (e) {
+        throw new Error(e)
     }
 }
+
+// export const login = (email: string, password: string, rememberMe: boolean): AppThunk => {
+//     return (dispatch) => {
+//         authAPI.login(email, password, rememberMe)
+//             .then((res) => {
+//                 if (res.data.resultCode === 0) {
+//                     dispatch(getAuthUserData())
+//                 }
+//             })
+//     }
+// }
