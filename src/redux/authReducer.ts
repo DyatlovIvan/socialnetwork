@@ -53,7 +53,7 @@ export const login = (email: string, password: string, rememberMe: boolean): App
             dispatch(getAuthUserData())
         }
     } catch (e) {
-        throw new Error(e)
+        //throw new Error(e)
     }
 }
 
