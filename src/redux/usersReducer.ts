@@ -35,7 +35,7 @@ const initialState: InitialStateType = {
     followingInProgress: []
 }
 
-export const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+export const usersReducer = (state = initialState, action: UsersActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case "FOLLOW": {
@@ -68,7 +68,7 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
     }
 }
 
-type ActionsTypes =
+export type UsersActionsTypes =
     followSuccessType
     | unfollowSuccessType
     | setUsersType

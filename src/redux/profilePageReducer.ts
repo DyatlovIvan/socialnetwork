@@ -45,7 +45,7 @@ const initialState: InitialStateType = {
     status: ''
 }
 
-export const profilePageReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+export const profilePageReducer = (state = initialState, action: ProfileActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case "ADD-POST":
@@ -63,7 +63,7 @@ export const profilePageReducer = (state = initialState, action: ActionsTypes): 
 }
 
 
-type ActionsTypes = AddPostType | SetUserProfileType | SetStatusType
+export type ProfileActionsTypes = AddPostType | SetUserProfileType | SetStatusType
 // type AddPostActionCreatorType = {
 //     type: 'ADD-POST'
 // }
