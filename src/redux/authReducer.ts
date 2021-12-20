@@ -34,12 +34,20 @@ const setAuthUserData = (userId:string,email:string,login:string)=>{
     }as const
 }
 
-export const getAuthUserData = () => (dispatch:Dispatch) =>{
+export const getAuthUserData = () => (dispatch:Dispatch<ActionsType>) =>{
     authAPI.getAuth().then(response => {
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data
             dispatch(setAuthUserData(id, email, login))
         }
-
     })
+}
+
+export const login = (email:string,password:string,rememberMe:boolean)=>(dispatch:Dispatch<ActionsType>)=>{
+ authAPI.login(email,password,rememberMe)
+     .then((res)=>{
+         if (res.data.resultCode ===0){
+              dispatch(getAuthUserData())
+         }
+     })
 }

@@ -3,7 +3,9 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPageType} from "../../redux/state";
 import {useFormik} from "formik";
-import {sendMessageCreator} from "../../redux/dialogsPageReducer";
+import * as Yup from "yup"
+import React from "react";
+
 
 type DialogType = {
     dialogsPage: DialogsPageType
@@ -45,21 +47,26 @@ const AddMessageForm = (props: AddMessageFormType) => {
         initialValues: {
             text: ""
         },
+        validationSchema:Yup.object({
+           text:Yup.string().max(50,'Must be 50 characters or less').required('Required')
+        }),
         onSubmit: values => {
             props.sendMessageCreator(values.text)
+            formik.values.text='';
         },
     });
 
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
-                <input
+                <textarea
                     id="text"
                     name="text"
-                    type="text"
                     onChange={formik.handleChange}
                     value={formik.values.text}
+                    onBlur={formik.handleBlur}
                     placeholder="Enter your message"/>
+                {formik.errors.text ? <div>{formik.errors.text}</div> : null}
             </div>
             <div>
                 <button type="submit">Submit</button>

@@ -1,4 +1,8 @@
 import {useFormik} from "formik";
+import style from './Login.module.css'
+import * as Yup from "yup"
+import React from "react";
+
 
 type valuesType = {
     login: string
@@ -21,11 +25,18 @@ const LoginForm = () => {
         initialValues: {
             login: '', password: '', rememberMe: false
         },
+        validationSchema: Yup.object({
+            login: Yup.string().required('Required'),
+            password: Yup.string().required('Required')
+        }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            // alert(JSON.stringify(values, null, 2));
+            console.log(values)
         },
     });
-
+    const validations = (touched: boolean | undefined, error: string | undefined) => {
+        return touched && error ? <div className={style.error}>{error}</div> : null
+    }
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
@@ -35,8 +46,9 @@ const LoginForm = () => {
                     name="login"
                     type="text"
                     onChange={formik.handleChange}
-                    value={formik.values.login}
-                />
+                    onBlur={formik.handleBlur}
+                    value={formik.values.login}/>
+                {validations(formik.touched.login, formik.errors.login)}
             </div>
 
             <div>
@@ -45,9 +57,10 @@ const LoginForm = () => {
                     id="password"
                     name="password"
                     type="password"
+                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    value={formik.values.password}
-                />
+                    value={formik.values.password}/>
+                {validations(formik.touched.password, formik.errors.password)}
             </div>
 
             <div>

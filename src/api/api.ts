@@ -33,7 +33,14 @@ export const followAPI = {
 export const authAPI = {
     getAuth() {
         return instanse.get('auth/me')
+    },
+    login(email:string,password:string,rememberMe:boolean=false){
+        return instanse.post('/auth/login',{email,password,rememberMe})
+    },
+    logout(){
+        return instanse.delete('/auth/login')
     }
+
 }
 
 export const profileAPI = {
