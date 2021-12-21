@@ -1,7 +1,7 @@
 import {useFormik} from "formik";
 import * as yup from "yup";
 import style from "./Login.module.css";
-import React from "react";
+import React, {ChangeEvent} from "react";
 
 export type LoginDataType = {
     email: string
@@ -9,7 +9,8 @@ export type LoginDataType = {
     rememberMe: boolean
 }
 type LoginFormType = {
-    loginSuccess: boolean
+    errorMassage: string
+    setErrorMassage:(errorMassage:string)=>void
     onSubmit: (formData:LoginDataType)=>void
 }
 
@@ -29,6 +30,12 @@ export const LoginForm = (props:LoginFormType) => {
     const validations = (touched: boolean | undefined, error: string | undefined) => {
         return touched && error ? <div className={style.error}>{error}</div> : null
     }
+    const OnChangeHandler = (e:ChangeEvent<HTMLInputElement>) =>{
+        formik.handleChange(e)
+        props.setErrorMassage('')
+
+    }
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
@@ -37,7 +44,7 @@ export const LoginForm = (props:LoginFormType) => {
                     id="email"
                     name="email"
                     type="email"
-                    onChange={formik.handleChange}
+                    onChange={OnChangeHandler}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}/>
                 {validations(formik.touched.email, formik.errors.email)}
@@ -50,7 +57,7 @@ export const LoginForm = (props:LoginFormType) => {
                     name="password"
                     type="password"
                     onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
+                    onChange={OnChangeHandler}
                     value={formik.values.password}/>
                 {validations(formik.touched.password, formik.errors.password)}
             </div>
@@ -65,7 +72,7 @@ export const LoginForm = (props:LoginFormType) => {
                 />
                 <label>remember me</label>
             </div>
-            {!props.loginSuccess && <div>ERROR</div>}
+            {props.errorMassage && <div className={style.error}>{props.errorMassage}</div>}
             <button type="submit">Submit</button>
         </form>
     )

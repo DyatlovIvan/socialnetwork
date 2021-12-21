@@ -1,15 +1,19 @@
 import React from "react";
 import {LoginDataType, LoginForm} from "./loginForm";
 import {connect} from "react-redux";
-import {login} from "../../redux/authReducer";
+import {login,setErrorMassage} from "../../redux/authReducer";
 import {RootStoreType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
 
+
+
 type LoginType = {
     isAuth: boolean
-    loginSuccess: boolean
+    errorMassage: string
     login: (email: string, password: string, rememberMe: boolean) => void
+    setErrorMassage:(errorMassage:string)=>void
 }
+
 const Login = (props: LoginType) => {
     const onSubmit = (formData: LoginDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
@@ -20,7 +24,8 @@ const Login = (props: LoginType) => {
     return (
         <div>
             <h1>LOGIN</h1>
-            <LoginForm loginSuccess={props.loginSuccess}
+            <LoginForm errorMassage={props.errorMassage}
+                       setErrorMassage = {props.setErrorMassage}
                        onSubmit={onSubmit}/>
         </div>
     )
@@ -29,9 +34,9 @@ const Login = (props: LoginType) => {
 const mapStateToProps = (state: RootStoreType) => {
     return {
         isAuth: state.auth.isAuth,
-        loginSuccess: state.auth.loginSuccess
+        errorMassage: state.auth.errorMassage
     }
 }
 
-export default connect(mapStateToProps, {login})(Login)
+export default connect(mapStateToProps ,{login,setErrorMassage})(Login)
 

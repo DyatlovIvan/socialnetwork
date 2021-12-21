@@ -8,7 +8,7 @@ type InitialStateType = {
     email: null | string
     login: null | string
     isAuth: boolean
-    loginSuccess:boolean
+    errorMassage:string
 }
 
 const initialState: InitialStateType = {
@@ -16,7 +16,7 @@ const initialState: InitialStateType = {
     email: null,
     login: null,
     isAuth: false,
-    loginSuccess:true
+    errorMassage:''
 }
 
 export const authReducer = (state = initialState, action: AuthActionsType) => {
@@ -25,7 +25,7 @@ export const authReducer = (state = initialState, action: AuthActionsType) => {
             return {...state, ...action.payload}
         }
         case "LOGIN_SUCCESS":{
-            return {...state,loginSuccess:action.value}
+            return {...state,errorMassage:action.errorMassage}
         }
         default:
             return state
@@ -33,7 +33,7 @@ export const authReducer = (state = initialState, action: AuthActionsType) => {
 
 }
 
-export type AuthActionsType = SetAuthUserDataType | SetLoginSuccessType
+export type AuthActionsType = SetAuthUserDataType | SetErrorMassageType
 type SetAuthUserDataType = ReturnType<typeof setAuthUserData>
 const setAuthUserData = (userId:string|null , email:string|null , login:string|null,isAuth:boolean) => {
     return {
@@ -42,9 +42,9 @@ const setAuthUserData = (userId:string|null , email:string|null , login:string|n
     } as const
 }
 
-type SetLoginSuccessType = ReturnType<typeof setLoginSuccess>
-const setLoginSuccess = (value:boolean)=>{
-    return{type:'LOGIN_SUCCESS',value} as const
+type SetErrorMassageType = ReturnType<typeof setErrorMassage>
+export const setErrorMassage = (errorMassage:string)=>{
+    return{type:'LOGIN_SUCCESS',errorMassage} as const
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch<AuthActionsType>) => {
@@ -62,7 +62,7 @@ export const login = (email: string, password: string, rememberMe: boolean): App
         if (res.data.resultCode === 0) {
             dispatch(getAuthUserData())
         }else{
-            dispatch(setLoginSuccess(false))
+            dispatch(setErrorMassage(res.data.messages[0]))
         }
     } catch (e) {
         //throw new Error(e)
