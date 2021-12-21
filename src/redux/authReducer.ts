@@ -8,13 +8,15 @@ type InitialStateType = {
     email: null | string
     login: null | string
     isAuth: boolean
+    loginSuccess:boolean
 }
 
 const initialState: InitialStateType = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    loginSuccess:true
 }
 
 export const authReducer = (state = initialState, action: AuthActionsType) => {
@@ -22,19 +24,27 @@ export const authReducer = (state = initialState, action: AuthActionsType) => {
         case "SET_USER_DATA": {
             return {...state, ...action.payload}
         }
+        case "LOGIN_SUCCESS":{
+            return {...state,loginSuccess:action.value}
+        }
         default:
             return state
     }
 
 }
 
-export type AuthActionsType = SetAuthUserDataType
+export type AuthActionsType = SetAuthUserDataType | SetLoginSuccessType
 type SetAuthUserDataType = ReturnType<typeof setAuthUserData>
 const setAuthUserData = (userId:string|null , email:string|null , login:string|null,isAuth:boolean) => {
     return {
         type: 'SET_USER_DATA',
         payload: {id: userId, email, login,isAuth}
     } as const
+}
+
+type SetLoginSuccessType = ReturnType<typeof setLoginSuccess>
+const setLoginSuccess = (value:boolean)=>{
+    return{type:'LOGIN_SUCCESS',value} as const
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch<AuthActionsType>) => {
@@ -51,6 +61,8 @@ export const login = (email: string, password: string, rememberMe: boolean): App
         const res = await authAPI.login(email, password, rememberMe)
         if (res.data.resultCode === 0) {
             dispatch(getAuthUserData())
+        }else{
+            dispatch(setLoginSuccess(false))
         }
     } catch (e) {
         //throw new Error(e)

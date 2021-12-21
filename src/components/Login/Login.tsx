@@ -5,30 +5,33 @@ import {login} from "../../redux/authReducer";
 import {RootStoreType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
 
-type LoginType ={
+type LoginType = {
     isAuth: boolean
-    login:(email: string, password: string, rememberMe: boolean)=>void
+    loginSuccess: boolean
+    login: (email: string, password: string, rememberMe: boolean) => void
 }
- const Login = (props:LoginType) => {
-    const onSubmit = (formData:LoginDataType)=>{
-        props.login(formData.email,formData.password,formData.rememberMe)
+const Login = (props: LoginType) => {
+    const onSubmit = (formData: LoginDataType) => {
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
-    if(props.isAuth){
-        return <Redirect to = {'/profile'}/>
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
     return (
         <div>
             <h1>LOGIN</h1>
-            <LoginForm onSubmit = {onSubmit}/>
+            <LoginForm loginSuccess={props.loginSuccess}
+                       onSubmit={onSubmit}/>
         </div>
     )
 }
 
-const mapStateToProps = (state:RootStoreType) => {
-    return{
-        isAuth:state.auth.isAuth
+const mapStateToProps = (state: RootStoreType) => {
+    return {
+        isAuth: state.auth.isAuth,
+        loginSuccess: state.auth.loginSuccess
     }
 }
 
-export default connect(mapStateToProps,{login})(Login)
+export default connect(mapStateToProps, {login})(Login)
 

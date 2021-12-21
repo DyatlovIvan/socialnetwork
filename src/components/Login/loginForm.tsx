@@ -1,5 +1,5 @@
 import {useFormik} from "formik";
-import * as Yup from "yup";
+import * as yup from "yup";
 import style from "./Login.module.css";
 import React from "react";
 
@@ -9,7 +9,8 @@ export type LoginDataType = {
     rememberMe: boolean
 }
 type LoginFormType = {
-    onSubmit:(formData:LoginDataType)=>void
+    loginSuccess: boolean
+    onSubmit: (formData:LoginDataType)=>void
 }
 
 export const LoginForm = (props:LoginFormType) => {
@@ -17,9 +18,9 @@ export const LoginForm = (props:LoginFormType) => {
         initialValues: {
             email: '', password: '', rememberMe: false
         },
-        validationSchema: Yup.object({
-            email: Yup.string().required('Required').email('incorrectly filled email'),
-            password: Yup.string().required('Required')
+        validationSchema: yup.object().shape({
+            email: yup.string().required('Required').email('incorrectly filled email'),
+            password: yup.string().required('Required')
         }),
         onSubmit: values => {
             props.onSubmit(values)
@@ -64,7 +65,7 @@ export const LoginForm = (props:LoginFormType) => {
                 />
                 <label>remember me</label>
             </div>
-
+            {!props.loginSuccess && <div>ERROR</div>}
             <button type="submit">Submit</button>
         </form>
     )
