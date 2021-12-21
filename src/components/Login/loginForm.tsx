@@ -18,7 +18,7 @@ export const LoginForm = (props:LoginFormType) => {
             email: '', password: '', rememberMe: false
         },
         validationSchema: Yup.object({
-            email: Yup.string().required('Required'),
+            email: Yup.string().required('Required').email('incorrectly filled email'),
             password: Yup.string().required('Required')
         }),
         onSubmit: values => {
@@ -35,7 +35,7 @@ export const LoginForm = (props:LoginFormType) => {
                     placeholder="login"
                     id="email"
                     name="email"
-                    type="text"
+                    type="email"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}/>
