@@ -9,20 +9,18 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {DialogContainer} from "./components/Dialogs/DialogsContainer";
 import {connect} from "react-redux";
-import {getAuthUserData, logout} from "./redux/authReducer";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 
 type mapDispatchPropsType = {
-    getAuthUserData: () => void
-    logout:()=>void
+    initializeApp:()=>void
 }
 
 class App extends React.Component<mapDispatchPropsType> {
 
     componentDidMount() {
-        this.props.getAuthUserData()
+
     }
     render() {
         return (
