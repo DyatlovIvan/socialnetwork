@@ -18,7 +18,7 @@ type mapStateToPropsType = {
     profile: ProfileType | null
     status: string
     authorizedUserId: number
-    isAuth:boolean
+    isAuth: boolean
 
 
 }
@@ -34,10 +34,12 @@ class ProfileContainer extends React.Component<PropsType> {
         let userId = +this.props.match.params.userId
         if (!userId) {
             userId = +this.props.authorizedUserId
+            if (!userId) {
+                this.props.history.push("/login")
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
-
     }
 
     render() {
@@ -55,8 +57,8 @@ const mapStateToProps = (state: RootStoreType) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        authorizedUserId:  state.auth.userId,
-        isAuth:state.auth.isAuth
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth
     }
 }
 

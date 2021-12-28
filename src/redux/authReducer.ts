@@ -38,7 +38,7 @@ export type SetAuthUserDataType = ReturnType<typeof setAuthUserData>
 const setAuthUserData = (userId:string|null , email:string|null , login:string|null,isAuth:boolean) => {
     return {
         type: 'SET_USER_DATA',
-        payload: {id: userId, email, login,isAuth}
+        payload: {userId: userId, email, login,isAuth}
     } as const
 }
 

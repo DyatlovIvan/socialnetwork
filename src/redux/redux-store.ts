@@ -4,6 +4,7 @@ import {DialogsActionsTypes, dialogsPageReducer} from "./dialogsPageReducer";
 import {UsersActionsTypes, usersReducer} from "./usersReducer";
 import {AuthActionsType, authReducer} from "./authReducer";
 import thunk, {ThunkAction} from "redux-thunk";
+import {appReducer} from "./appReducer";
 
 
 let reducers = combineReducers({
@@ -11,6 +12,7 @@ let reducers = combineReducers({
     dialogsPage: dialogsPageReducer,
     usersPage: usersReducer,
     auth:authReducer,
+    app:appReducer
 
 })
 export  type AppActionType = AuthActionsType

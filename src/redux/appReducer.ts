@@ -11,7 +11,7 @@ const initialState = {
     initialized: false
 }
 
-const appReducer = (state:InitialStateType = initialState,action:appReducerActionType):InitialStateType =>{
+export const appReducer = (state:InitialStateType = initialState,action:appReducerActionType):InitialStateType =>{
         switch (action.type) {
             case 'INITIALIZED_SUCCESS':{
                 return {...state,initialized:true}
@@ -23,11 +23,9 @@ const appReducer = (state:InitialStateType = initialState,action:appReducerActio
 type appReducerActionType = ReturnType<typeof initializedSuccess>|AuthActionsType
 export const initializedSuccess = ()=>({type:'INITIALIZED_SUCCESS'}) as const
 
-export const initializeApp = (): ThunkAction<void, RootStoreType, unknown, appReducerActionType> => (dispatch:Dispatch<any>) => {
-    let a = dispatch(getAuthUserData())
+export const initializeApp = (): ThunkAction<void, RootStoreType, unknown, appReducerActionType> => async (dispatch) => {
+    await dispatch(getAuthUserData())
+    dispatch(initializedSuccess())
 
 
-        // .then(res=> {
-        //         dispatch(initializedSuccess())
-        //     })
 }
