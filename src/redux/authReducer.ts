@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
-import {AppActionType, AppThunk, RootStoreType} from "./redux-store";
+import {AppActionType, AppThunk, RootStateType} from "./redux-store";
 
 type InitialStateType = {
     userId: null | string

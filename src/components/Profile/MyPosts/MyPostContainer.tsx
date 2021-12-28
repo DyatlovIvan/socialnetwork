@@ -2,7 +2,7 @@ import {MyPost} from "./MyPost";
 import {addPost, PostsType} from "../../../redux/profilePageReducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {RootStoreType} from "../../../redux/redux-store";
+import {RootStateType} from "../../../redux/redux-store";
 
 
 type mapStateToPropsType = {
@@ -14,7 +14,7 @@ type mapDispatchToPropsType = {
     //onChangeNewPostHandler: (value: string) => void
 }
 
-const mapStateToProps = (state: RootStoreType): mapStateToPropsType => {
+const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts
     }

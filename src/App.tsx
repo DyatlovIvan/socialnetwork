@@ -12,7 +12,7 @@ import {withRouter} from "react-router";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import {Preloader} from "./common/preloader/Preloader";
-import {RootStoreType} from "./redux/redux-store";
+import {RootStateType} from "./redux/redux-store";
 
 type mapStateToPropsType = {
     initialized:boolean
@@ -48,7 +48,7 @@ class App extends React.Component<ownPropsType> {
     }
 }
 
-const mapStateToProps = (state:RootStoreType)=>({
+const mapStateToProps = (state:RootStateType)=>({
     initialized:state.app.initialized
 })
 

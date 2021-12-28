@@ -21,10 +21,10 @@ export  type AppActionType = AuthActionsType
     | UsersActionsTypes
 
 
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootStoreType, unknown, AppActionType>
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, AppActionType>
 let store = createStore(reducers,applyMiddleware(thunk));
 
-export type RootStoreType = ReturnType<typeof reducers>
+export type RootStateType = ReturnType<typeof reducers>
 export type StoreType = typeof store
 
 export default store

@@ -2,7 +2,7 @@ import React from "react";
 import {LoginDataType, LoginForm} from "./loginForm";
 import {connect} from "react-redux";
 import {login,setErrorMassage} from "../../redux/authReducer";
-import {RootStoreType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/redux-store";
 import {Redirect} from "react-router-dom";
 
 
@@ -31,7 +31,7 @@ const Login = (props: LoginType) => {
     )
 }
 
-const mapStateToProps = (state: RootStoreType) => {
+const mapStateToProps = (state: RootStateType) => {
     return {
         isAuth: state.auth.isAuth,
         errorMassage: state.auth.errorMassage
