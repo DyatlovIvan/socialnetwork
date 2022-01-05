@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 
 type PathParamsType = {
     status: string
@@ -12,6 +12,10 @@ type prevStateType = {
 export const ProfileStatusWithHooks = (props: PathParamsType) => {
     const [editMode,setEditMode] = useState<boolean>(false)
     const [status,setStatus] = useState<string>(props.status)
+
+    useEffect(()=>{
+        setStatus(props.status)
+    },[props.status])
 
     const activateEditMode = () =>{
         setEditMode(true)
