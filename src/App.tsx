@@ -13,7 +13,7 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import {Preloader} from "./common/preloader/Preloader";
 import {RootStateType} from "./redux/redux-store";
-
+//jsx-> (bable in JS and for component create)React.createElement
 type mapStateToPropsType = {
     initialized:boolean
 }
