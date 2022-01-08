@@ -4,7 +4,7 @@ import {
     followSuccess, getUsersThunkCreator, onPageChangedThunkCreator,
     toggleFollowingInProgress,
     unfollowSuccess,follow,unfollow,
-    UsersType
+    UserType
 } from "../../redux/usersReducer";
 import React from "react";
 import {Users} from "./Users";
@@ -20,7 +20,7 @@ import {
 
 
 type UsersPresentType = {
-    users: Array<UsersType>
+    users: Array<UserType>
     totalUserCount: number
     pageSize: number
     currentPage: number

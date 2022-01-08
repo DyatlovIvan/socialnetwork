@@ -33,7 +33,6 @@ class App extends React.Component<ownPropsType> {
             return <Preloader/>
         }
         return (
-
                     <div className="app-wrapper">
                         <HeaderContainer/>
                         <Navbar/>
@@ -46,7 +45,6 @@ class App extends React.Component<ownPropsType> {
                             </Switch>
                         </div>
                     </div>
-
         );
     }
 }

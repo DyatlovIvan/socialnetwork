@@ -8,7 +8,7 @@ type InitialStateType = {
     email: null | string
     login: null | string
     isAuth: boolean
-    errorMassage:string
+    errorMassage: string
 }
 
 const initialState: InitialStateType = {
@@ -16,16 +16,16 @@ const initialState: InitialStateType = {
     email: null,
     login: null,
     isAuth: false,
-    errorMassage:''
+    errorMassage: ''
 }
 
 export const authReducer = (state = initialState, action: AuthActionsType) => {
     switch (action.type) {
-        case "SET_USER_DATA": {
+        case "AUTH/SET_USER_DATA": {
             return {...state, ...action.payload}
         }
-        case "LOGIN_SUCCESS":{
-            return {...state,errorMassage:action.errorMassage}
+        case "AUTH/LOGIN_SUCCESS": {
+            return {...state, errorMassage: action.errorMassage}
         }
         default:
             return state
@@ -35,48 +35,44 @@ export const authReducer = (state = initialState, action: AuthActionsType) => {
 
 export type AuthActionsType = SetAuthUserDataType | SetErrorMassageType
 export type SetAuthUserDataType = ReturnType<typeof setAuthUserData>
-const setAuthUserData = (userId:string|null , email:string|null , login:string|null,isAuth:boolean) => {
+const setAuthUserData = (userId: string | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
-        type: 'SET_USER_DATA',
-        payload: {userId: userId, email, login,isAuth}
+        type: 'AUTH/SET_USER_DATA',
+        payload: {userId: userId, email, login, isAuth}
     } as const
 }
 
 export type SetErrorMassageType = ReturnType<typeof setErrorMassage>
-export const setErrorMassage = (errorMassage:string)=>{
-    return{type:'LOGIN_SUCCESS',errorMassage} as const
+export const setErrorMassage = (errorMassage: string) => {
+    return {type: 'AUTH/LOGIN_SUCCESS', errorMassage} as const
 }
 
-export const getAuthUserData = () =>(dispatch: Dispatch<AuthActionsType>) => {
-    return authAPI.getAuth()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data
-                dispatch(setAuthUserData(id, email, login, true))
-            }
-        })
+export const getAuthUserData = () => async (dispatch: Dispatch<AuthActionsType>) => {
+    let response = await authAPI.getAuth()
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data
+        dispatch(setAuthUserData(id, email, login, true))
+    }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean): AppThunk => async dispatch => {
     try {
-        const res = await authAPI.login(email, password, rememberMe)
-        if (res.data.resultCode === 0) {
+        const response = await authAPI.login(email, password, rememberMe)
+        if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
-        }else{
-            dispatch(setErrorMassage(res.data.messages[0]))
+        } else {
+            dispatch(setErrorMassage(response.data.messages[0]))
         }
     } catch (e) {
         //throw new Error(e)
     }
 }
 
-export const logout = (): AppThunk => (dispatch) => {
-    authAPI.logout()
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setAuthUserData(null,null,null,false))
+export const logout = (): AppThunk => async (dispatch) => {
+    let response =  await authAPI.logout()
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
             }
-        })
 }
 
 // export const login = (email: string, password: string, rememberMe: boolean): AppThunk => {
