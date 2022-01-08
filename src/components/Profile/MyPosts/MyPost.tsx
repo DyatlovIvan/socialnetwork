@@ -13,7 +13,7 @@ type MyPostType = {
 
 }
 
-export function MyPost(props: MyPostType) {
+export const MyPost = React.memo((props: MyPostType) => {
     let postsElement = props.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>);
 
     const AddNewPostHandler = (newPostText: string) => {
@@ -33,7 +33,7 @@ export function MyPost(props: MyPostType) {
 
         </div>
     )
-}
+})
 
 type AddPostFormType = {
     AddNewPostHandler: (newPostText: string) => void
