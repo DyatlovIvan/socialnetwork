@@ -1,4 +1,4 @@
-import {MyPost} from "./MyPost";
+import {MyPosts} from "./MyPosts";
 import {addPost, PostsType} from "../../../redux/profilePageReducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 }
 
 
-export const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost);
+export const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);

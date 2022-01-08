@@ -15,10 +15,10 @@ import {Preloader} from "./common/preloader/Preloader";
 import {RootStateType} from "./redux/redux-store";
 //jsx-> (bable in JS and for component create)React.createElement
 type mapStateToPropsType = {
-    initialized:boolean
+    initialized: boolean
 }
 type mapDispatchPropsType = {
-    initializeApp:()=>void
+    initializeApp: () => void
 }
 type ownPropsType = mapStateToPropsType & mapDispatchPropsType
 
@@ -27,29 +27,32 @@ class App extends React.Component<ownPropsType> {
     componentDidMount() {
         this.props.initializeApp()
     }
+
     render() {
-        if (!this.props.initialized){
+        if (!this.props.initialized) {
             return <Preloader/>
         }
         return (
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <Navbar/>
-                <div className="app-wrapper-content">
-                    <Switch>
-                        <Route path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
-                        <Route path={"/dialogs"} render={() => <DialogContainer/>}/>
-                        <Route path={"/users"} render={() => <UsersContainer/>}/>
-                        <Route path={"/login"} render={() => <Login/>}/>
-                    </Switch>
-                </div>
-            </div>
+
+                    <div className="app-wrapper">
+                        <HeaderContainer/>
+                        <Navbar/>
+                        <div className="app-wrapper-content">
+                            <Switch>
+                                <Route path={"/profile/:userId?"} render={() => <ProfileContainer/>}/>
+                                <Route path={"/dialogs"} render={() => <DialogContainer/>}/>
+                                <Route path={"/users"} render={() => <UsersContainer/>}/>
+                                <Route path={"/login"} render={() => <Login/>}/>
+                            </Switch>
+                        </div>
+                    </div>
+
         );
     }
 }
 
-const mapStateToProps = (state:RootStateType)=>({
-    initialized:state.app.initialized
+const mapStateToProps = (state: RootStateType) => ({
+    initialized: state.app.initialized
 })
 
 export default compose<React.ComponentType>(

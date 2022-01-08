@@ -13,8 +13,8 @@ type MyPostType = {
 
 }
 
-export const MyPost = React.memo((props: MyPostType) => {
-    let postsElement = props.posts.map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>);
+export const MyPosts = React.memo((props: MyPostType) => {
+    let postsElement = [...props.posts.reverse()].map(p => <Post id={p.id} message={p.message} likeCount={p.likeCount}/>);
 
     const AddNewPostHandler = (newPostText: string) => {
         props.AddNewPostHandler(newPostText)
