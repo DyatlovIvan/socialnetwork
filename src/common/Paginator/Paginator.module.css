@@ -2,5 +2,6 @@
     font-weight: bold;
 }
 .page{
+    margin: 2px;
     cursor: pointer;
 }
