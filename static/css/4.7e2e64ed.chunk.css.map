@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/components/Dialogs/Dialogs.module.css"],"names":[],"mappings":"AAAA,wBACI,YAAa,CACb,8BACJ","file":"4.7e2e64ed.chunk.css","sourcesContent":[".dialogs{\r\n    display: grid;\r\n    grid-template-columns: 1fr 10fr;\r\n}"]}
