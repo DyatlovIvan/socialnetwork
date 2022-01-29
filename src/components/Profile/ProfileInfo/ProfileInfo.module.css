@@ -10,3 +10,7 @@
     height: 300px;
     width: 100%;
 }
+
+.mainPhoto{
+    max-width: 200px;
+}
