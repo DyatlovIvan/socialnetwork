@@ -21,7 +21,7 @@ const DialogContainer = React.lazy(() =>
 );
 const ProfileContainer = React.lazy(() =>
     import('./components/Profile/ProfileContainer')
-        .then(({ProfileContainer}) => ({default: ProfileContainer})),
+        .then(({ProfilesContainer}) => ({default: ProfilesContainer})),
 );
 
 
