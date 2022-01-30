@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileType} from "../redux/profilePageReducer";
 
 const instanse = axios.create({
     withCredentials: true,
@@ -60,6 +61,9 @@ export const profileAPI = {
             headers:{
                 'Content-Type':'multiline/from-data'
             }})
+    },
+    updateProfileInfo(profileData:ProfileType){
+        return instanse.put('profile',profileData)
     }
 }
 

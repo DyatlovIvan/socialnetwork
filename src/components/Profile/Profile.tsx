@@ -9,6 +9,7 @@ type PropsType = {
     status: string
     updateStatus: (status: string) => void
     savePhoto:(photo:File) => void
+    saveProfile:(profileData:ProfileType)=>void
 }
 
 export function Profile(props: PropsType) {
@@ -19,6 +20,7 @@ export function Profile(props: PropsType) {
                          status={props.status}
                          updateStatus={props.updateStatus}
                          savePhoto = {props.savePhoto}
+                         saveProfile = {props.saveProfile}
             />
             <MyPostContainer/>
         </div>

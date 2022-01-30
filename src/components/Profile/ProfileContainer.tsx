@@ -2,7 +2,14 @@ import React from "react";
 import {Profile} from "./Profile";
 import {RootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {ProfileType, getUserProfile, getStatus, putStatus, savePhoto} from "../../redux/profilePageReducer";
+import {
+    ProfileType,
+    getUserProfile,
+    getStatus,
+    putStatus,
+    savePhoto,
+    saveProfile
+} from "../../redux/profilePageReducer";
 import {RouteComponentProps, withRouter} from "react-router";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -27,6 +34,7 @@ type mapDispatchPropsType = {
     getStatus: (userId: number) => void
     putStatus: (status: string) => void
     savePhoto: (photo: File) => void
+    saveProfile:(profileData:ProfileType)=>void
 }
 
 
@@ -49,14 +57,12 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
 
-    componentDidUpdate(prevProps: PropsType, prevState: PropsType) {
-        // if (this.props.match.params.userId) {
-        //if (this.props.match.params.userId !== prevState.match.params.userId) {
-        this.refreshProfile()
-        // }
-        //  }
-
+    componentDidUpdate(prevProps: PropsType) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
     }
+
 
 
     render() {
@@ -66,7 +72,9 @@ class ProfileContainer extends React.Component<PropsType> {
                      profile={this.props.profile}
                      status={this.props.status}
                      updateStatus={this.props.putStatus}
-                     savePhoto={this.props.savePhoto}/>
+                     savePhoto={this.props.savePhoto}
+                     saveProfile = {this.props.saveProfile}
+            />
         )
     }
 }
@@ -85,7 +93,7 @@ const mapStateToProps = (state: RootStateType) => {
 // export default withAuthRedirect(connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent));
 
 export const ProfilesContainer = compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatus, putStatus, savePhoto}),
+    connect(mapStateToProps, {getUserProfile, getStatus, putStatus, savePhoto,saveProfile}),
     withAuthRedirect,
     withRouter
 )(ProfileContainer)

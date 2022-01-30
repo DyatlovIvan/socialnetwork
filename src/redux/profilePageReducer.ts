@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import {RootStateType} from "./redux-store";
+import {ThunkAction} from "redux-thunk";
 
 export type InitialStateType = {
     posts: Array<PostsType>
@@ -34,6 +36,7 @@ export type ProfileType = {
     fullName: string
     contacts: ContactsType
     photos: PhotosType
+    aboutMe:string
 }
 
 const initialState: InitialStateType = {
@@ -60,9 +63,7 @@ export const profilePageReducer = (state = initialState, action: ProfileActionsT
         case "DELETE-POST":
             return {...state, posts: state.posts.filter(f => f.id !== action.id)}
         case "SAVE_PHOTO_SUCCESS" :
-            debugger
-            //return {...state,profile:{...state.profile,photos:action.photos}}
-            return state
+            return {...state, profile : state.profile && {...state.profile, photos: action.photos}}
         default:
             return state
     }
@@ -133,8 +134,15 @@ export const putStatus = (status: string) => (dispatch: Dispatch) => {
 
 export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
     let response = await profileAPI.savePhoto(photo)
-    if (response.data.resultCode === 0){
-        debugger
+    if (response.data.resultCode === 0) {
         dispatch(SavePhotoSuccess(response.data.data.photos))
+    }
+}
+
+export const saveProfile = (profileData: ProfileType):ThunkAction<void, RootStateType, unknown, ProfileActionsTypes> => async (dispatch,getState:()=>RootStateType) => {
+    const userId = Number(getState().auth.userId)
+    let response = await profileAPI.updateProfileInfo(profileData)
+    if (response.data.resultCode === 0 ) {
+       await dispatch(getUserProfile(userId))
     }
 }
