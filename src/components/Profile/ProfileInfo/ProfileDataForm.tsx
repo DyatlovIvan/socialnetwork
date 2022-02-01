@@ -1,6 +1,7 @@
 import {useFormik} from "formik";
-import {ProfileType} from "../../../redux/profilePageReducer";
+import {ContactsType, ProfileType} from "../../../redux/profilePageReducer";
 import React, {ChangeEventHandler} from "react";
+import style from './ProfileInfo.module.css'
 
 type ProfileDataFormType = {
     saveProfile: (profileData: ProfileType) => void
@@ -22,7 +23,7 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                 instagram: props.profile.contacts.instagram,
                 youtube: props.profile.contacts.youtube,
                 github: props.profile.contacts.github,
-                mainLink: props.profile.contacts.mainLink
+                mainLink: props.profile.contacts.mainLink,
             }
 
 
@@ -73,9 +74,8 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
             </div>
 
             <b>Contacts</b>: {Object.entries(props.profile.contacts).map(([key, value]) => {
-                debugger
-                let name = props.profile.contacts[key]
-            return <div>
+
+            return <div className={style.contact}>
                 <b>{key}</b>: <input
                 id={`contacts.${key}`}
                 name={`contacts.${key}`}
@@ -83,7 +83,7 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                 onChange={OnChangeHandler}
                 onBlur={formik.handleBlur}
 
-                value={formik.values.contacts.vk}/>
+                value={formik.values.contacts[key as keyof ContactsType]}/>
             </div>
         })}
 

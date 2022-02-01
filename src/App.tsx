@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 //import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -24,7 +24,6 @@ const ProfileContainer = React.lazy(() =>
         .then(({ProfilesContainer}) => ({default: ProfilesContainer})),
 );
 
-
 //jsx-> (bable in JS and for component create)React.createElement
 type mapStateToPropsType = {
     initialized: boolean
@@ -38,6 +37,7 @@ class App extends React.Component<ownPropsType> {
 
     componentDidMount() {
         this.props.initializeApp()
+
     }
 
     render() {
@@ -50,6 +50,8 @@ class App extends React.Component<ownPropsType> {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Switch>
+                        <Route exact path={"/"}
+                               render={()=> <Redirect to = {'/profile'}/>}/>
                         <Route path={"/profile/:userId?"}
                                render={withSuspense(ProfileContainer)}/>
                         <Route path={"/dialogs"}

@@ -36,12 +36,18 @@ export const authAPI = {
         return instanse.get('auth/me')
     },
     login(email:string,password:string,rememberMe:boolean=false){
-        return instanse.post('/auth/login',{email,password,rememberMe})
+        return instanse.post('auth/login',{email,password,rememberMe})
     },
     logout(){
-        return instanse.delete('/auth/login')
+        return instanse.delete('auth/login')
     }
 
+}
+
+export const securityAPI = {
+    getCaptchaUrl(){
+        return instanse.get('security/get-captcha-url')
+    }
 }
 
 export const profileAPI = {
@@ -66,4 +72,6 @@ export const profileAPI = {
         return instanse.put('profile',profileData)
     }
 }
+
+
 

@@ -10,6 +10,7 @@ import {Redirect} from "react-router-dom";
 type LoginType = {
     isAuth: boolean
     errorMassage: string
+    captchaUrl: null | string
     login: (email: string, password: string, rememberMe: boolean) => void
     setErrorMassage:(errorMassage:string)=>void
 }
@@ -26,7 +27,8 @@ const Login = (props: LoginType) => {
             <h1>LOGIN</h1>
             <LoginForm errorMassage={props.errorMassage}
                        setErrorMassage = {props.setErrorMassage}
-                       onSubmit={onSubmit}/>
+                       onSubmit={onSubmit}
+                       captchaUrl = {props.captchaUrl} />
         </div>
     )
 }
@@ -34,7 +36,8 @@ const Login = (props: LoginType) => {
 const mapStateToProps = (state: RootStateType) => {
     return {
         isAuth: state.auth.isAuth,
-        errorMassage: state.auth.errorMassage
+        errorMassage: state.auth.errorMassage,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 

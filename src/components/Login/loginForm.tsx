@@ -12,6 +12,7 @@ type LoginFormType = {
     errorMassage: string
     setErrorMassage:(errorMassage:string)=>void
     onSubmit: (formData:LoginDataType)=>void
+    captchaUrl:null | string
 }
 
 export const LoginForm = (props:LoginFormType) => {
@@ -38,6 +39,7 @@ export const LoginForm = (props:LoginFormType) => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
+            {props.captchaUrl && <img src={props.captchaUrl}/>}
             <div>
                 <input
                     placeholder="login"
