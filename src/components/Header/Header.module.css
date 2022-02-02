@@ -1,16 +1,39 @@
 .header {
     grid-area: h;
-    background-color: #272d4e;
+    background: linear-gradient(#3A0064, darkslateblue);
+    border-radius: 8px;
 }
 .header img{
     width: 70px;
     height: 70px;
     margin-left: 10px;
+
 }
 
 .loginBlock{
     float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+
 }
-.loginBlock a{
+.login{
     color: white;
+    font-size: 20px;
+}
+
+.button {
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #520099;
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.button:hover {
+    background-color: #7536b4;
+    color: #fff;
+    text-shadow: #fff 0 0 4px;
+    box-shadow: #7536b4 0 0 15px;
 }

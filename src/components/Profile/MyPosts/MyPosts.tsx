@@ -61,12 +61,13 @@ const AddPostForm = (props: AddPostFormType) => {
                     onChange={formik.handleChange}
                     value={formik.values.text}
                     onBlur={formik.handleBlur}
+                    className={style.textarea}
                     placeholder="Enter your message"/>
                 {formik.touched.text && formik.errors.text ? <div>{formik.errors.text}</div> : null}
             </div>
 
             <div>
-                <button type="submit">add post</button>
+                <button type="submit" className={style.button}>add post</button>
             </div>
         </form>
     )

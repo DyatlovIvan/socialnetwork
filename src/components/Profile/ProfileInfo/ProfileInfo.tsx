@@ -33,7 +33,8 @@ export function ProfileInfo(props: PropsType) {
                         <img src={props.profile.photos.large || userPhoto} className={style.mainPhoto}/>
 
                         {props.isOwner &&
-                        <input id='file' type={'file'} onChange={onMainPhotoSelected} name={'file'} className={style.inputFile}/>}
+                        <input id='file' type={'file'} onChange={onMainPhotoSelected} name={'file'}
+                               className={style.inputFile}/>}
                         <label htmlFor="file">Change avatar</label>
 
                     </div>
@@ -56,9 +57,9 @@ export function ProfileInfo(props: PropsType) {
 
 const ProfileData = (props: ProfileDataType) => {
     return (
-        <div>
+        <div className={style.info}>
             {props.isOwner && <div>
-                <button onClick={props.goToEditMode}>edit</button>
+                <button onClick={props.goToEditMode} className={style.button}>edit</button>
             </div>}
             <div>
                 <b>Full name</b>: {props.profile.fullName}
@@ -76,7 +77,9 @@ const ProfileData = (props: ProfileDataType) => {
             </div>
             <div>
                 <b>Contacts</b>: {Object.entries(props.profile.contacts).map(([key, value]) => {
-                return <Contacts key={key} contactTitle={key} contactValue={value}/>
+                if (value !== null) {
+                    return <Contacts key={key} contactTitle={key} contactValue={value}/>
+                }
             })}
             </div>
         </div>
