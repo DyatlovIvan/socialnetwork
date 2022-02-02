@@ -1,7 +1,7 @@
 import {useFormik} from "formik";
 import {ContactsType, ProfileType} from "../../../redux/profilePageReducer";
 import React, {ChangeEventHandler} from "react";
-import style from './ProfileInfo.module.css'
+import style from './ProfileInfo.module.scss'
 
 type ProfileDataFormType = {
     saveProfile: (profileData: ProfileType) => void

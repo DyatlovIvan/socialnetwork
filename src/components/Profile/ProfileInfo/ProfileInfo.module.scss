@@ -1,0 +1,47 @@
+.descriptionBlock{
+    padding: 10px;
+    display: flex;
+}
+.photoBlock{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.descriptionBlock img {
+    height: 200px;
+}
+
+.mainPhoto{
+    max-width: 200px;
+    padding-bottom: 5px;
+}
+.contact{
+    padding-left: 10px;
+}
+
+.inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+& + label {
+      display: inline-block;
+      cursor: pointer;
+      color: #fff;
+      font-size: 18px;
+      white-space: nowrap;
+      background-color: darkgreen;
+      padding: 8px 12px;
+      border-radius: 8px;
+  }
+&:focus + label,
+& + label:hover {
+      background-color: #00aa00;
+      color: #fff;
+      text-shadow: #fff 0 0 4px;
+      box-shadow: #009900 0 0 15px;
+  }
+}

@@ -7,11 +7,21 @@
     grid-template-columns: 1fr 5fr;
     grid-gap: 2px;
     margin: 0 auto;
-    width: 1900px;
+
+    max-height: 100vh;
+    min-height: 100vh;
+    height: 100%;
+    overflow-y: hidden;
+    max-width: 1170px;
+    width: 100%;
+    margin: 0 auto;
 
 }
+.container {
 
+}
 .app-wrapper-content {
     grid-area: c;
     background-color: cornflowerblue;
+    overflow: auto;
 }

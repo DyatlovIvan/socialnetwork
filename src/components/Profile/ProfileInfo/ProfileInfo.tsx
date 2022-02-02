@@ -1,4 +1,4 @@
-import style from './ProfileInfo.module.css'
+import style from './ProfileInfo.module.scss'
 import {Preloader} from "../../../common/preloader/Preloader";
 import {ProfileType} from "../../../redux/profilePageReducer";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
@@ -19,7 +19,7 @@ export function ProfileInfo(props: PropsType) {
         }
     }
 
-    const saveProfileHandler = (profileData: ProfileType)=>{
+    const saveProfileHandler = (profileData: ProfileType) => {
         debugger
         props.saveProfile(profileData)
         setEditMode(false)
@@ -28,14 +28,26 @@ export function ProfileInfo(props: PropsType) {
     return (
         <div>
             <div className={style.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto} className={style.mainPhoto}/>
-                {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+                <div className={style.mainInfo}>
+                    <div className={style.photoBlock}>
+                        <img src={props.profile.photos.large || userPhoto} className={style.mainPhoto}/>
+
+                        {props.isOwner &&
+                        <input id='file' type={'file'} onChange={onMainPhotoSelected} name={'file'} className={style.inputFile}/>}
+                        <label htmlFor="file">Change avatar</label>
+
+                    </div>
+                    <ProfileStatusWithHooks status={props.status}
+                                            updateStatus={props.updateStatus}/>
+                </div>
+
+
                 {editMode
                     ? <ProfileDataForm saveProfile={saveProfileHandler} profile={props.profile}/>
-                    : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={()=>setEditMode(true)}/>}
+                    : <ProfileData profile={props.profile} isOwner={props.isOwner}
+                                   goToEditMode={() => setEditMode(true)}/>}
 
-                <ProfileStatusWithHooks status={props.status}
-                                        updateStatus={props.updateStatus}/>
+
             </div>
         </div>
 
@@ -72,8 +84,6 @@ const ProfileData = (props: ProfileDataType) => {
 }
 
 
-
-
 const Contacts = ({contactTitle, contactValue}: ContactsType) => {
     return (
         <div className={style.contact}>
@@ -88,7 +98,7 @@ type PropsType = {
     status: string
     updateStatus: (status: string) => void
     savePhoto: (photo: File) => void
-    saveProfile:(profileData:ProfileType)=>void
+    saveProfile: (profileData: ProfileType) => void
 }
 
 type ProfileDataType = {
