@@ -40,11 +40,11 @@ export const usersReducer = (state = initialState, action: UsersActionsTypes): I
 
     switch (action.type) {
         case "FOLLOW": {
-            return {...state, users: updateObjectInArray(state.users,action.userId,{followed: true})}
-                //state.users.map(el => el.id === action.userId ? {...el, followed: true} : {...el})}
+            return {...state, users: updateObjectInArray(state.users, action.userId, {followed: true})}
+            //state.users.map(el => el.id === action.userId ? {...el, followed: true} : {...el})}
         }
         case 'UNFOLLOW': {
-            return {...state, users: updateObjectInArray(state.users,action.userId,{followed: false})}
+            return {...state, users: updateObjectInArray(state.users, action.userId, {followed: false})}
         }
         case 'SET_USERS': {
             return {...state, users: action.users}
@@ -73,8 +73,7 @@ export type UsersActionsTypes =
     | setUsersType
     | setCurrentPageType
     | setTotalUsersCountType
-    |
-    toggleIsFetchingType
+    | toggleIsFetchingType
     | toggleFollowingInProgressType
 
 type followSuccessType = ReturnType<typeof followSuccess>
@@ -84,7 +83,6 @@ export const followSuccess = (userId: number) => {
     } as const
 }
 
-// type ActionCommonType = ReturnType<typeof addPostActionCreator> |  ReturnType<typeof updateNewPostTextActionCreator>
 type unfollowSuccessType = ReturnType<typeof unfollowSuccess>
 export const unfollowSuccess = (userId: number) => {
     return {
@@ -147,7 +145,7 @@ export const onPageChangedThunkCreator = (pageNumber: number, pageSize: number) 
 }
 
 const followUnfollowFlow = async (dispatch: Dispatch, userId: number,
-                                  apiMethod:(id:number)=>any, actionCreator:(userId: number)=>{type:string,userId:number}) => {
+                                  apiMethod: (id: number) => any, actionCreator: (userId: number) => { type: string, userId: number }) => {
     dispatch(toggleFollowingInProgress(true, userId))
     let response = await apiMethod(userId)
     if (response.resultCode === 0) {
@@ -156,17 +154,14 @@ const followUnfollowFlow = async (dispatch: Dispatch, userId: number,
     dispatch(toggleFollowingInProgress(false, userId))
 }
 
-export const unfollow =  (userId: number) => {
-    return async(dispatch: Dispatch) => {
-        followUnfollowFlow(dispatch,userId,followAPI.deleteFollow.bind(followAPI),unfollowSuccess)
-
-
-
+export const unfollow = (userId: number) => {
+    return async (dispatch: Dispatch) => {
+        await followUnfollowFlow(dispatch, userId, followAPI.deleteFollow.bind(followAPI), unfollowSuccess)
     }
 }
 
 export const follow = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        followUnfollowFlow(dispatch,userId,followAPI.postFollow.bind(followAPI),followSuccess)
+    return async (dispatch: Dispatch) => {
+        await followUnfollowFlow(dispatch, userId, followAPI.postFollow.bind(followAPI), followSuccess)
     }
 }

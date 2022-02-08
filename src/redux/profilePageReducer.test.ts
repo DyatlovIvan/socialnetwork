@@ -32,3 +32,4 @@ test(`after deleting length shouldn't be decrement`, () => {
 
     expect(newState.posts.length).toBe(2)
 })
+
